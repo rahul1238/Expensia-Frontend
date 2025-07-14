@@ -1,60 +1,24 @@
 import { Link } from "react-router-dom";
 import Logo from "./Logo";
+import NavbarLink from "./ui/NavbarLink";
+import LinkButton from "./ui/LinkButton";
 
 export default function Navbar() {
   return (
-    <nav className="bg-white shadow-md fixed top-0 w-full z-auto rounded-md items-center ">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
-        <div className="flex justify-between h-16 items-center ">
-          <Logo/>
-          <div className="hidden md:flex space-x-8">
-            <a
-              href="#home"
-              className="text-gray-700 hover:text-green-600 font-medium transition"
-            >
-              Home
-            </a>
-            <a
-              href="#features"
-              className="text-gray-700 hover:text-green-600 font-medium transition"
-            >
-              Features
-            </a>
-            <a
-              href="#about"
-              className="text-gray-700 hover:text-green-600 font-medium transition"
-            >
-              About
-            </a>
-            <a
-              href="#team"
-              className="text-gray-700 hover:text-green-600 font-medium transition"
-            >
-              Team
-            </a>
-            <a
-              href="#contact"
-              className="text-gray-700 hover:text-green-600 font-medium transition"
-            >
-              Contact
-            </a>
-          </div>
+    <nav className="fixed top-0 left-0 w-full z-50 bg-transparent overflow-x-hidden pt-4">
+      <div className="container mx-auto px-4 flex items-center justify-between h-16 bg-slate-200 rounded-md shadow-lg w-auto transition-all duration-300">
+        <Link to="/" className="flex items-center space-x-2">
+          <Logo size={36} />
+        </Link>
 
-          {/* Right Buttons */}
-          <div className="hidden md:flex space-x-4">
-            <Link
-              to="/login"
-              className="text-gray-700 hover:text-green-600 font-medium transition"
-            >
-              Login
-            </Link>
-            <Link
-              to="/signup"
-              className="bg-green-500 text-white px-4 py-2 rounded-full hover:bg-green-600 transition"
-            >
-              Sign Up
-            </Link>
-          </div>
+        <div className="hidden md:flex items-center space-x-6">
+          <NavbarLink href="#home">Home</NavbarLink>
+          <NavbarLink href="#features">Features</NavbarLink>
+          <NavbarLink href="#about">About</NavbarLink>
+          <NavbarLink href="#team">Team</NavbarLink>
+          <NavbarLink href="#contact">Contact</NavbarLink>
+          <LinkButton to="/login" variant="ghost">Login</LinkButton>
+          <LinkButton to="/signup" variant="primary">Sign Up</LinkButton>
         </div>
       </div>
     </nav>
