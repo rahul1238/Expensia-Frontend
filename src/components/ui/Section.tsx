@@ -11,7 +11,7 @@ export default function Section({ id, className = "", children, style }: Section
     return (
         <section
             id={id}
-            className={`w-full m-0 p-0 ${className}`}
+            className={`w-full overflow-x-hidden py-12 ${className}`}
             style={style}
         >
             {children}

@@ -5,13 +5,14 @@ import Section from "./ui/Section";
 export default function Hero() {
     return (
         <Section
-            className="relative w-screen h-screen bg-cover bg-center text-white flex flex-col justify-center items-center overflow-hidden"
-            style={{ backgroundImage: `url('/assets/graph.jpg')` }}
-        >
-            {/* Overlay */}
-            <div className="absolute inset-0 bg-black bg-opacity-50"></div>
-
-            {/* Content */}
+            id="home"
+            className="relative w-screen h-screen bg-cover bg-center text-white flex flex-col justify-center items-center"
+            style={{ 
+                backgroundImage: `url('/assets/graph.jpg')`,
+                marginTop: 0,
+                paddingTop: 0
+            }}>
+            <div className="absolute inset-0 bg-black bg-opacity-50 z-0" />
             <div className="relative z-10 text-center px-4">
                 <Heading level={1} className="text-4xl md:text-6xl mb-4">
                     Manage Your Finances Effortlessly with Expensia
@@ -22,6 +23,5 @@ export default function Hero() {
                 <LinkButton to="/signup">Get Started</LinkButton>
             </div>
         </Section>
-
     );
 }
