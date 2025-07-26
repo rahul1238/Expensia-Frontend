@@ -10,8 +10,6 @@ const ThemeToggle: React.FC = () => {
   const isDarkMode = themeMode === "dark" as ThemeMode;
 
   useEffect(() => {
-    console.log("ThemeToggle theme mode:", themeMode);
-    // Let App.tsx handle the class management for consistency
     localStorage.setItem("theme", themeMode);
   }, [themeMode]);
 

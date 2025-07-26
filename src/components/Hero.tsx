@@ -1,8 +1,11 @@
 import LinkButton from "./ui/LinkButton";
 import Heading from "./ui/Heading";
 import Section from "./ui/Section";
+import { useSelector } from "react-redux";
+import  type { RootState } from "../app/store";
 
 export default function Hero() {
+    const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
     return (
         <Section
             id="home"
@@ -20,7 +23,9 @@ export default function Hero() {
                 <p className="text-lg md:text-xl mb-6">
                     Track expenses, analyze spending, and plan your future smarter than ever.
                 </p>
-                <LinkButton to="/signup">Get Started</LinkButton>
+                <LinkButton to={isAuthenticated ? "/dashboard" : "/signup"}>
+                    {isAuthenticated ? "Go to Dashboard" : "Get Started"}
+                </LinkButton>
             </div>
         </Section>
     );

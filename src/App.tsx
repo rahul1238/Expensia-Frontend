@@ -1,10 +1,12 @@
 import "./App.css";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-import { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { Routes, Route, useLocation } from "react-router-dom";
 import ProtectedRoute from "./components/ProtectedRoute";
+import { logIn } from "./feature/auth/authSlice";
+import { userService } from "./services/userService";
 
 // Pages
 import Home from "./pages/Home";
@@ -18,17 +20,42 @@ import type { RootState } from "./app/store";
 function App() {
   const themeMode = useSelector((state: RootState) => state.theme.mode);
   const location = useLocation();
-  
+  const dispatch = useDispatch();
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
-    // Make sure all existing classes are removed first
     document.documentElement.classList.remove('dark', 'light');
-    // Then add the appropriate class
     document.documentElement.classList.add(themeMode);
-    console.log("App theme mode set to:", themeMode);
   }, [themeMode]);
 
-  // Determine if the current route is a public route (like login/signup)
+  useEffect(() => {
+    const checkAuthStatus = async () => {
+      try {
+        const user = await userService.getCurrentUser();
+
+        dispatch(logIn({
+          user,
+          token: "auth-cookie-present"
+        }));
+      } catch (err) {
+        // User is not authenticated - normal if not logged in
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    checkAuthStatus();
+  }, [dispatch]);
+
   const isPublicRoute = ['/login', '/signup'].includes(location.pathname);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-white dark:bg-gray-900">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-green-500"></div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen w-full overflow-x-hidden bg-white dark:bg-gray-900 text-gray-900 dark:text-white transition-colors duration-300">
