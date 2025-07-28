@@ -31,8 +31,14 @@ function App() {
   useEffect(() => {
     const checkAuthStatus = async () => {
       try {
+        // Skip auth check if we're already on auth pages to prevent loops
+        if (['/login', '/signup', '/forgot-password'].includes(location.pathname)) {
+          setLoading(false);
+          return;
+        }
+        
         const user = await userService.getCurrentUser();
-
+        
         dispatch(logIn({
           user,
           token: "auth-cookie-present"
@@ -45,7 +51,7 @@ function App() {
     };
 
     checkAuthStatus();
-  }, [dispatch]);
+  }, [dispatch]); // Only depend on dispatch, not location.pathname
 
   const isPublicRoute = ['/login', '/signup'].includes(location.pathname);
 

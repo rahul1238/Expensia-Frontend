@@ -6,6 +6,7 @@ const initialState: AuthState = {
   isAuthenticated: false,
   user: null,
   token: null,
+  lastAuthCheck: null,
 };
 
 const authSlice = createSlice({
@@ -16,14 +17,26 @@ const authSlice = createSlice({
       state.isAuthenticated = true;
       state.user = action.payload.user;
       state.token = action.payload.token;
+      state.lastAuthCheck = Date.now();
     },
+    
     logOut: (state) => {
       state.isAuthenticated = false;
       state.user = null;
       state.token = null;
+      state.lastAuthCheck = Date.now();
+    },
+    
+    updateUser: (state, action: PayloadAction<User>) => {
+      state.user = action.payload;
+    },
+    
+    updateToken: (state, action: PayloadAction<string>) => {
+      state.token = action.payload;
+      state.lastAuthCheck = Date.now();
     },
   },
 });
 
-export const { logIn, logOut } = authSlice.actions;
+export const { logIn, logOut, updateUser, updateToken } = authSlice.actions;
 export default authSlice.reducer;

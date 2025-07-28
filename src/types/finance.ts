@@ -11,6 +11,19 @@ export interface Transaction {
   tags?: string[];
 }
 
+export interface TransactionData {
+  id?: string;
+  userId?: string;
+  description: string;
+  amount: number;
+  currency?: string;
+  date?: string;
+  category?: string;
+  type?: 'credit' | 'debit';
+  notes?: string;
+  transactionMethod?: 'CASH' | 'CREDIT_CARD' | 'DEBIT_CARD' | 'UPI' | 'NET_BANKING' | 'OTHER';
+}
+
 export interface Category {
   id: string | number;
   name: string;

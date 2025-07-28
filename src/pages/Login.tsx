@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { logIn } from "../feature/auth/authSlice";
 import Button from "../components/ui/Button";
@@ -15,6 +15,21 @@ export default function Login() {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const location = useLocation();
+    
+    // Get the redirect path from location state (if coming from ProtectedRoute)
+    const from = (location.state as { from?: string })?.from || "/dashboard";
+    
+    // Check for expired session in URL parameters
+    useEffect(() => {
+        const searchParams = new URLSearchParams(location.search);
+        if (searchParams.get('expired') === 'true') {
+            setError('Your session has expired. Please log in again.');
+            
+            // Clean up the URL to prevent showing the error on refresh
+            navigate('/login', { replace: true });
+        }
+    }, [location.search, navigate]);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -51,8 +66,9 @@ export default function Login() {
             }));
 
             await userService.checkCookieStatus();
-
-            navigate('/dashboard');
+            
+            console.log("Login successful, navigating to:", from);
+            navigate(from, { replace: true });
         } catch (error) {
             setError(error instanceof Error ? error.message : "An unexpected error occurred.");
         } finally {

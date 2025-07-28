@@ -7,14 +7,23 @@ export const userService = {
   async login(
     email: string,
     password: string,
-    rememberMe: boolean = false
+    rememberMe = false
   ): Promise<AuthResponse> {
     try {
+      if (!email || !email.trim()) {
+        throw new Error("Email is required");
+      }
+      
+      if (!password) {
+        throw new Error("Password is required");
+      }
+
       const response = await api.post<AuthResponse>("/auth/login", {
-        email,
+        email: email.trim(),
         password,
         rememberMe,
       });
+      
       return response.data;
     } catch (error) {
       if (axios.isAxiosError(error)) {
@@ -47,7 +56,7 @@ export const userService = {
     }
   },
 
-  async logout() {
+  async logout(): Promise<void> {
     try {
       await api.post("/auth/logout");
     } catch (error) {
@@ -61,12 +70,23 @@ export const userService = {
         "remember-me"
       ) as HTMLInputElement;
       const rememberMe = rememberMeEl?.checked || false;
+      
+      const requestData = { ...signUpDTO, rememberMe };
+      
+      if (signUpDTO.name && (!signUpDTO.firstName || !signUpDTO.lastName)) {
+        const nameParts = signUpDTO.name.split(' ');
+        requestData.firstName = requestData.firstName || nameParts[0];
+        requestData.lastName = requestData.lastName || 
+          nameParts.slice(1).join(' ') || 
+          signUpDTO.firstName || 
+          '';
+        
+        if (!requestData.username) {
+          requestData.username = signUpDTO.email.split('@')[0];
+        }
+      }
 
-      const response = await api.post<AuthResponse>("/auth/register", {
-        ...signUpDTO,
-        rememberMe,
-      });
-
+      const response = await api.post<AuthResponse>("/auth/register", requestData);
       return response.data;
     } catch (error) {
       if (axios.isAxiosError(error)) {
@@ -89,6 +109,38 @@ export const userService = {
         validateStatus: () => true,
       });
       return response.status === 200;
+    } catch (error) {
+      return false;
+    }
+  },
+  
+  async refreshToken(): Promise<boolean> {
+    try {
+      const REFRESH_COOLDOWN_MS = 5000;
+      const lastRefreshAttempt = sessionStorage.getItem('lastRefreshAttempt');
+      const currentTime = Date.now();
+      
+      if (lastRefreshAttempt && currentTime - parseInt(lastRefreshAttempt) < REFRESH_COOLDOWN_MS) {
+        return false;
+      }
+      
+      sessionStorage.setItem('lastRefreshAttempt', currentTime.toString());
+      
+      const response = await axios.post(
+        `${api.defaults.baseURL}/auth/refresh`,
+        {},
+        {
+          withCredentials: true,
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+      
+      if (response.status === 200) {
+        sessionStorage.removeItem('lastRefreshAttempt');
+        return true;
+      }
+      
+      return false;
     } catch (error) {
       return false;
     }

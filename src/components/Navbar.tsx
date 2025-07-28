@@ -27,7 +27,7 @@ export default function Navbar() {
           {isHomePage ? (
             <>
               {isAuthenticated && (
-                <NavbarLink href="/dashboard" className="text-blue-300 hover:text-green-400 dark:text-blue-400 dark:hover:text-green-300">Dashboard</NavbarLink>
+                <Link to="/dashboard" className="text-blue-300 hover:text-green-400 dark:text-blue-400 dark:hover:text-green-300">Dashboard</Link>
               )}
               <NavbarLink href="#features" className="text-blue-300 hover:text-green-400 dark:text-blue-400 dark:hover:text-green-300">Features</NavbarLink>
               <NavbarLink href="#about" className="text-blue-300 hover:text-green-400 dark:text-blue-400 dark:hover:text-green-300">About</NavbarLink>
