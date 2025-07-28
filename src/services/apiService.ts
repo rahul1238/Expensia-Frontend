@@ -6,6 +6,7 @@ const api = axios.create({
     "Content-Type": "application/json",
   },
   withCredentials: true,
+  timeout: 30000,
 });
 
 api.interceptors.request.use(
@@ -17,19 +18,19 @@ api.interceptors.request.use(
 );
 
 interface QueueItem {
-  resolve: (value?: any) => void;
-  reject: (reason?: any) => void;
+  resolve: (value?: unknown) => void;
+  reject: (reason?: unknown) => void;
 }
 
 let isRefreshing = false;
 let failedQueue: QueueItem[] = [];
 
 const processQueue = (error: Error | null) => {
-  failedQueue.forEach((prom) => {
+  failedQueue.forEach((promise) => {
     if (error) {
-      prom.reject(error);
+      promise.reject(error);
     } else {
-      prom.resolve();
+      promise.resolve();
     }
   });
 
@@ -37,26 +38,18 @@ const processQueue = (error: Error | null) => {
 };
 
 api.interceptors.response.use(
-  (response) => {
-    return response;
-  },
+  (response) => response,
+  
   async (error) => {
     const originalRequest = error.config;
 
-    if (
-      (error.response?.status === 401 || error.response?.status === 403) &&
-      !originalRequest._retry
-    ) {
+    if ((error.response?.status === 401 || error.response?.status === 403) && !originalRequest._retry) {
       if (isRefreshing) {
-        return new Promise(function (resolve, reject) {
+        return new Promise((resolve, reject) => {
           failedQueue.push({ resolve, reject });
         })
-          .then(() => {
-            return api(originalRequest);
-          })
-          .catch((err) => {
-            return Promise.reject(err);
-          });
+          .then(() => api(originalRequest))
+          .catch((err) => Promise.reject(err));
       }
 
       originalRequest._retry = true;
@@ -64,42 +57,49 @@ api.interceptors.response.use(
 
       if (
         originalRequest.url?.includes("/auth/login") ||
-        originalRequest.url?.includes("/auth/refresh-token")
+        originalRequest.url?.includes("/auth/refresh")
       ) {
         isRefreshing = false;
         return Promise.reject(error);
       }
 
       try {
-        await axios.post(
-          `${api.defaults.baseURL}/auth/refresh-token`,
+        const refreshResponse = await axios.post(
+          `${api.defaults.baseURL}/auth/refresh`,
           {},
           {
             withCredentials: true,
             headers: { "Content-Type": "application/json" },
           }
         );
-
-        processQueue(null);
-        isRefreshing = false;
-
-        return api(originalRequest);
+        
+        if (refreshResponse.status === 200) {
+          processQueue(null);
+          isRefreshing = false;
+          return api(originalRequest);
+        } else {
+          throw new Error("Token refresh failed");
+        }
       } catch (err) {
         processQueue(
           err instanceof Error ? err : new Error("Token refresh failed")
         );
         isRefreshing = false;
-
-        if (!window.location.pathname.includes("/login")) {
-          setTimeout(() => {
-            window.location.href = "/login";
-          }, 100);
+        
+        document.cookie = "accessToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        document.cookie = "refreshToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        
+        if (!window.location.pathname.includes('/login')) {
+          window.history.pushState({}, '', '/login?expired=true');
+          window.dispatchEvent(new PopStateEvent('popstate'));
         }
+        
         return Promise.reject(
           new Error("Session expired. Please login again.")
         );
       }
     }
+    
     return Promise.reject(error);
   }
 );
