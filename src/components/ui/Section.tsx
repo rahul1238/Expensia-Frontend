@@ -1,11 +1,4 @@
-import React from "react";
-
-interface SectionProps {
-    id?: string;
-    className?: string;
-    children: React.ReactNode;
-    style?: React.CSSProperties;
-}
+import type { SectionProps } from "../../types/components";
 
 export default function Section({ id, className = "", children, style }: SectionProps) {
     return (

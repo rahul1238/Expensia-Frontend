@@ -1,9 +1,5 @@
 import React from "react";
-import type { TransactionData } from "../types/finance";
-
-interface TransactionProps {
-  transaction: TransactionData;
-}
+import type { TransactionProps } from "../types/components";
 
 const Transaction: React.FC<TransactionProps> = ({ transaction }) => {
   // Ensure we have valid properties, with defaults for any missing fields

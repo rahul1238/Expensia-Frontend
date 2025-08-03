@@ -1,8 +1,5 @@
 
-interface StatBoxProps {
-  value: string;
-  label: string;
-}
+import type { StatBoxProps } from "../../types/components";
 
 export default function StatBox({ value, label }: StatBoxProps) {
   return (

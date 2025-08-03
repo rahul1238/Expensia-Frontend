@@ -1,9 +1,4 @@
-import React, { type AnchorHTMLAttributes } from "react";
-
-interface NavbarLinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
-  href: string;
-  children: React.ReactNode;
-}
+import type { NavbarLinkProps } from "../../types/components";
 
 function NavbarLink({ href, children, ...props }: NavbarLinkProps) {
   return (

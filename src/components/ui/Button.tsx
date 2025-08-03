@@ -1,10 +1,4 @@
-import { type ButtonHTMLAttributes } from "react";
-
-type ButtonVariant = "primary" | "outline" | "ghost";
-
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-    variant?: ButtonVariant;
-}
+import type { ButtonProps, ButtonVariant } from "../../types/components";
 
 function Button({children,variant = "primary",...props}: ButtonProps) {
 
