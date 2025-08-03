@@ -33,22 +33,22 @@ const Dashboard: React.FC = () => {
       setIsLoading(true);
       setError(null);
       const response = await transactionService.getAllTransactions();
-      
+
       // Ensure we have transactions array, default to empty array if undefined
       const transactions = response.transactions || [];
       setTransactions(transactions);
-      
+
       console.log('Received transactions:', transactions);
-      
+
       // Calculate summary from transactions data
       const totalIncome = transactions
         .filter(t => t.type === 'credit')
         .reduce((sum, t) => sum + t.amount, 0);
-        
+
       const totalExpenses = transactions
         .filter(t => t.type === 'debit')
         .reduce((sum, t) => sum + t.amount, 0);
-        
+
       setSummary({
         totalIncome,
         totalExpenses,
@@ -68,25 +68,25 @@ const Dashboard: React.FC = () => {
 
   const handleAddTransaction = (transaction: TransactionData) => {
     console.log('New transaction created:', transaction);
-    
+
     // Add an id if it doesn't exist
     if (!transaction.id) {
       transaction.id = `temp-${Date.now()}`;
     }
-    
+
     // Add a date if it doesn't exist
     if (!transaction.date) {
       transaction.date = new Date().toISOString();
     }
-    
+
     // Add the new transaction to the list
     setTransactions(prev => [transaction, ...prev]);
-    
+
     // Update summary with the new transaction
     setSummary(prev => {
       // Default to debit if type is not specified
       const isCredit = transaction.type === 'credit';
-      
+
       if (isCredit) {
         return {
           totalIncome: prev.totalIncome + transaction.amount,
@@ -101,9 +101,9 @@ const Dashboard: React.FC = () => {
         };
       }
     });
-    
+
     setShowAddModal(false);
-    
+
     // Optionally refresh transactions from server
     // fetchTransactions();
   };
@@ -122,17 +122,17 @@ const Dashboard: React.FC = () => {
 
       <Section className="py-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <StatBox 
-            value={formatCurrency(summary.totalIncome)} 
-            label="Total Income" 
+          <StatBox
+            value={formatCurrency(summary.totalIncome)}
+            label="Total Income"
           />
-          <StatBox 
-            value={formatCurrency(summary.totalExpenses)} 
-            label="Total Expenses" 
+          <StatBox
+            value={formatCurrency(summary.totalExpenses)}
+            label="Total Expenses"
           />
-          <StatBox 
-            value={formatCurrency(summary.netBalance)} 
-            label="Net Balance" 
+          <StatBox
+            value={formatCurrency(summary.netBalance)}
+            label="Net Balance"
           />
         </div>
       </Section>
@@ -141,14 +141,14 @@ const Dashboard: React.FC = () => {
         <Card>
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-2xl font-semibold text-gray-800 dark:text-white">Recent Transactions</h2>
-            <Link 
+            <Link
               to="/transactions"
               className="text-green-600 hover:text-green-700 dark:text-green-400 dark:hover:text-green-300 font-medium transition-colors"
             >
               View All Transactions →
             </Link>
           </div>
-          
+
           {error && (
             <div className="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-6" role="alert">
               <p>{error}</p>
@@ -203,12 +203,12 @@ const Dashboard: React.FC = () => {
         </Card>
       </Section>
 
-      <Modal 
-        isOpen={showAddModal} 
+      <Modal
+        isOpen={showAddModal}
         onClose={() => setShowAddModal(false)}
         title="Add Transaction"
       >
-        <AddTransactionForm 
+        <AddTransactionForm
           onSuccess={handleAddTransaction}
           onCancel={() => setShowAddModal(false)}
         />

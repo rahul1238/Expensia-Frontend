@@ -5,6 +5,7 @@ import type { TransactionData } from './finance';
 import type { TransactionFilters } from '../services/transactionService';
 
 export type ButtonVariant = 'primary' | 'outline' | 'ghost';
+export type ButtonSize = 'sm' | 'md' | 'lg';
 export type LinkButtonVariant = 'primary' | 'outline' | 'ghost';
 
 export interface ProtectedRouteProps {
@@ -42,6 +43,7 @@ export interface TransactionFiltersProps {
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariant;
+  size?: ButtonSize;
 }
 
 export interface CardProps {
