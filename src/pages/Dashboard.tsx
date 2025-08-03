@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import Card from '../components/ui/Card';
 import Button from '../components/ui/Button';
 import Section from '../components/ui/Section';
@@ -111,7 +112,12 @@ const Dashboard: React.FC = () => {
     <div className="container mx-auto px-4 py-8 pt-24">
       <div className="flex flex-wrap items-center justify-between mb-8">
         <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Dashboard</h1>
-        <Button onClick={() => setShowAddModal(true)}>Add Transaction</Button>
+        <div className="flex space-x-3">
+          <Button onClick={() => setShowAddModal(true)}>Add Transaction</Button>
+          <Link to="/transactions">
+            <Button variant="outline">Manage Transactions</Button>
+          </Link>
+        </div>
       </div>
 
       <Section className="py-6">
@@ -133,7 +139,15 @@ const Dashboard: React.FC = () => {
 
       <Section className="py-6">
         <Card>
-          <h2 className="text-2xl font-semibold mb-6 text-gray-800 dark:text-white">Recent Transactions</h2>
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-2xl font-semibold text-gray-800 dark:text-white">Recent Transactions</h2>
+            <Link 
+              to="/transactions"
+              className="text-green-600 hover:text-green-700 dark:text-green-400 dark:hover:text-green-300 font-medium transition-colors"
+            >
+              View All Transactions →
+            </Link>
+          </div>
           
           {error && (
             <div className="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-6" role="alert">
@@ -168,7 +182,7 @@ const Dashboard: React.FC = () => {
                   </tr>
                 </thead>
                 <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
-                  {transactions.map(transaction => (
+                  {transactions.slice(0, 5).map(transaction => (
                     <Transaction key={transaction.id} transaction={transaction} />
                   ))}
                 </tbody>

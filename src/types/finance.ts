@@ -1,4 +1,5 @@
 // Financial data type definitions
+import type { TransactionMethodValue, TransactionCategory, CurrencyValue } from '../constants';
 
 export interface Transaction {
   id: string | number;
@@ -16,12 +17,12 @@ export interface TransactionData {
   userId?: string;
   description: string;
   amount: number;
-  currency?: string;
+  currency?: CurrencyValue;
   date?: string;
-  category?: string;
+  category?: TransactionCategory;
   type?: 'credit' | 'debit';
   notes?: string;
-  transactionMethod?: 'CASH' | 'CREDIT_CARD' | 'DEBIT_CARD' | 'UPI' | 'NET_BANKING' | 'OTHER';
+  transactionMethod?: TransactionMethodValue;
 }
 
 export interface Category {

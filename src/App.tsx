@@ -13,6 +13,7 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Dashboard from "./pages/Dashboard";
+import Transactions from "./pages/Transactions";
 import NotFound from "./pages/NotFound";
 
 import type { RootState } from "./app/store";
@@ -36,9 +37,9 @@ function App() {
           setLoading(false);
           return;
         }
-        
+
         const user = await userService.getCurrentUser();
-        
+
         dispatch(logIn({
           user,
           token: "auth-cookie-present"
@@ -73,6 +74,11 @@ function App() {
         <Route path="/dashboard" element={
           <ProtectedRoute>
             <Dashboard />
+          </ProtectedRoute>
+        } />
+        <Route path="/transactions" element={
+          <ProtectedRoute>
+            <Transactions />
           </ProtectedRoute>
         } />
         <Route path="*" element={<NotFound />} />

@@ -1,9 +1,5 @@
-import React from "react";
-import { Link,type LinkProps } from "react-router-dom";
-
-type LinkButtonVariant = "primary" | "outline" | "ghost";
-
-interface LinkButtonProps extends LinkProps {variant?: LinkButtonVariant;children: React.ReactNode;}
+import { Link } from "react-router-dom";
+import type { LinkButtonProps, LinkButtonVariant } from "../../types/components";
 
 function LinkButton({to,children,variant = "primary",...props}: LinkButtonProps) {
   const baseClasses = "px-4 py-2 rounded-full font-medium transition";
