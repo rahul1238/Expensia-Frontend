@@ -38,7 +38,7 @@ export const AppearanceSettings: React.FC<AppearanceSettingsProps> = ({
     <div className="space-y-6">
       <div>
         <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
-          {t.settings.appearance}
+          {t('settings.appearance')}
         </h2>
         {saveMessage && (
           <Alert 
@@ -52,27 +52,27 @@ export const AppearanceSettings: React.FC<AppearanceSettingsProps> = ({
       <div className="space-y-4">
         {/* Theme Selection */}
         <SettingsCard
-          title={t.settings.theme}
-          description={t.settings.themeSubtitle}
+          title={t('settings.theme')}
+          description={t('settings.themeSubtitle')}
         >
           <div className="flex items-center space-x-3">
             <span className="text-sm text-gray-600 dark:text-gray-300 capitalize">
-              {themeMode === 'light' ? t.settings.light : t.settings.dark}
+              {themeMode === 'light' ? t('settings.light') : t('settings.dark')}
             </span>
             <Button
               onClick={handleThemeToggle}
               variant="primary"
               size="sm"
             >
-              {t.settings.switchTo} {themeMode === 'light' ? t.settings.dark : t.settings.light}
+              {t('settings.switchTo')} {themeMode === 'light' ? t('settings.dark') : t('settings.light')}
             </Button>
           </div>
         </SettingsCard>
 
         {/* Language Selection */}
         <SettingsCard
-          title={t.settings.language}
-          description={t.settings.languageSubtitle}
+          title={t('settings.language')}
+          description={t('settings.languageSubtitle')}
         >
           <Select
             value={language.code}

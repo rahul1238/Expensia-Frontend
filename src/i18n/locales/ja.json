@@ -1,0 +1,81 @@
+{
+  "settings": {
+    "title": "設定",
+    "subtitle": "アカウントの設定とアプリケーション設定を管理",
+    "account": "アカウント",
+    "appearance": "外観",
+    "notifications": "通知",
+    "privacy": "プライバシーとセキュリティ",
+    "financial": "財務",
+    "dataManagement": "データ管理",
+    "theme": "テーマ",
+    "themeSubtitle": "お好みのテーマを選択",
+    "language": "言語",
+    "languageSubtitle": "お好みの言語を選択",
+    "switchTo": "切り替え",
+    "dark": "ダーク",
+    "light": "ライト",
+    "languageChanged": "言語が変更されました"
+  },
+  "navigation": {
+    "dashboard": "ダッシュボード",
+    "profile": "プロファイル",
+    "settings": "設定",
+    "signOut": "サインアウト"
+  },
+  "common": {
+    "loading": "読み込み中...",
+    "save": "保存",
+    "cancel": "キャンセル",
+    "confirm": "確認",
+    "delete": "削除",
+    "edit": "編集",
+    "close": "閉じる",
+    "submit": "送信",
+    "back": "戻る",
+    "next": "次へ",
+    "previous": "前へ",
+    "search": "検索",
+    "filter": "フィルター",
+    "reset": "リセット"
+  },
+  "auth": {
+    "login": "ログイン",
+    "signup": "サインアップ",
+    "logout": "ログアウト",
+    "email": "メール",
+    "password": "パスワード",
+    "confirmPassword": "パスワード確認",
+    "rememberMe": "ログイン状態を保持",
+    "forgotPassword": "パスワードを忘れた？",
+    "dontHaveAccount": "アカウントをお持ちでない？",
+    "alreadyHaveAccount": "既にアカウントをお持ち？"
+  },
+  "dashboard": {
+    "title": "ダッシュボード",
+    "welcome": "おかえりなさい",
+    "totalBalance": "総残高",
+    "income": "収入",
+    "expenses": "支出",
+    "savings": "貯蓄"
+  },
+  "transactions": {
+    "title": "取引",
+    "addNew": "新しい取引を追加",
+    "recent": "最近の取引",
+    "amount": "金額",
+    "description": "説明",
+    "category": "カテゴリー",
+    "date": "日付",
+    "type": "種類"
+  },
+  "profile": {
+    "title": "プロファイル",
+    "personalInfo": "個人情報",
+    "firstName": "名",
+    "lastName": "姓",
+    "phone": "電話番号",
+    "address": "住所",
+    "dateOfBirth": "生年月日"
+  }
+}

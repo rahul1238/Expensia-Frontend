@@ -1,0 +1,81 @@
+{
+  "settings": {
+    "title": "الإعدادات",
+    "subtitle": "إدارة تفضيلات حسابك وإعدادات التطبيق",
+    "account": "الحساب",
+    "appearance": "المظهر",
+    "notifications": "الإشعارات",
+    "privacy": "الخصوصية والأمان",
+    "financial": "المالية",
+    "dataManagement": "إدارة البيانات",
+    "theme": "السمة",
+    "themeSubtitle": "اختر السمة المفضلة لديك",
+    "language": "اللغة",
+    "languageSubtitle": "اختر لغتك المفضلة",
+    "switchTo": "التبديل إلى",
+    "dark": "داكن",
+    "light": "فاتح",
+    "languageChanged": "تم تغيير اللغة إلى"
+  },
+  "navigation": {
+    "dashboard": "لوحة التحكم",
+    "profile": "الملف الشخصي",
+    "settings": "الإعدادات",
+    "signOut": "تسجيل الخروج"
+  },
+  "common": {
+    "loading": "جار التحميل...",
+    "save": "حفظ",
+    "cancel": "إلغاء",
+    "confirm": "تأكيد",
+    "delete": "حذف",
+    "edit": "تعديل",
+    "close": "إغلاق",
+    "submit": "إرسال",
+    "back": "رجوع",
+    "next": "التالي",
+    "previous": "السابق",
+    "search": "بحث",
+    "filter": "تصفية",
+    "reset": "إعادة تعيين"
+  },
+  "auth": {
+    "login": "تسجيل الدخول",
+    "signup": "إنشاء حساب",
+    "logout": "تسجيل الخروج",
+    "email": "البريد الإلكتروني",
+    "password": "كلمة المرور",
+    "confirmPassword": "تأكيد كلمة المرور",
+    "rememberMe": "تذكرني",
+    "forgotPassword": "نسيت كلمة المرور؟",
+    "dontHaveAccount": "ليس لديك حساب؟",
+    "alreadyHaveAccount": "هل لديك حساب بالفعل؟"
+  },
+  "dashboard": {
+    "title": "لوحة التحكم",
+    "welcome": "مرحباً بعودتك",
+    "totalBalance": "الرصيد الإجمالي",
+    "income": "الدخل",
+    "expenses": "المصروفات",
+    "savings": "المدخرات"
+  },
+  "transactions": {
+    "title": "المعاملات",
+    "addNew": "إضافة معاملة جديدة",
+    "recent": "المعاملات الأخيرة",
+    "amount": "المبلغ",
+    "description": "الوصف",
+    "category": "الفئة",
+    "date": "التاريخ",
+    "type": "النوع"
+  },
+  "profile": {
+    "title": "الملف الشخصي",
+    "personalInfo": "المعلومات الشخصية",
+    "firstName": "الاسم الأول",
+    "lastName": "اسم العائلة",
+    "phone": "رقم الهاتف",
+    "address": "العنوان",
+    "dateOfBirth": "تاريخ الميلاد"
+  }
+}

@@ -8,6 +8,7 @@ import Heading from "../components/ui/Heading";
 import type { AuthResponse } from "../types/auth";
 import type { SignupDTO } from "../types/dto/dtos";
 import { userService } from "../services/userService";
+import { useTranslation } from "../hooks/useTranslation";
 
 export default function Signup() {
     const [firstName, setFirstName] = useState("");
@@ -21,6 +22,8 @@ export default function Signup() {
     const [confirmPassword, setConfirmPassword] = useState("");
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
+    
+    const { t } = useTranslation();
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -30,7 +33,7 @@ export default function Signup() {
         setError(null);
 
         if (password !== confirmPassword) {
-            alert("Passwords do not match!");
+            setError(t('auth.passwordsMismatch'));
             return;
         }
 
@@ -50,7 +53,7 @@ export default function Signup() {
             const response: AuthResponse = await userService.signup(signupData);
 
             if (!response || !response.user) {
-                setError("Invalid response from server.");
+                setError(t('errors.serverError'));
                 setLoading(false);
                 return;
             }
@@ -62,7 +65,7 @@ export default function Signup() {
 
             navigate('/dashboard');
         } catch (error) {
-            setError(error instanceof Error ? error.message : "An unexpected error occurred");
+            setError(error instanceof Error ? error.message : t('errors.unexpected'));
         } finally {
             setLoading(false);
         }
@@ -81,10 +84,10 @@ export default function Signup() {
             <Card className="w-full max-w-md">
                 <div className="text-center mb-6">
                     <Heading level={1} className="text-2xl font-bold dark:text-white">
-                        Create Your Account
+                        {t('auth.createAccount')}
                     </Heading>
                     <p className="text-gray-600 dark:text-gray-300">
-                        Join Expensia and take control of your finances
+                        {t('auth.joinExpensia')}
                     </p>
                 </div>
 
@@ -99,7 +102,7 @@ export default function Signup() {
                             placeholder=" "
                         />
                         <label htmlFor="firstName" className={labelClass}>
-                            {getLabel("First Name", true)}
+                            {getLabel(t('auth.firstName'), true)}
                         </label>
                     </div>
 
@@ -113,7 +116,7 @@ export default function Signup() {
                             placeholder=" "
                         />
                         <label htmlFor="lastName" className={labelClass}>
-                            {getLabel("Last Name", true)}
+                            {getLabel(t('auth.lastName'), true)}
                         </label>
                     </div>
 
@@ -128,7 +131,7 @@ export default function Signup() {
                             placeholder=" "
                         />
                         <label htmlFor="email" className={labelClass}>
-                            {getLabel("Email", true)}
+                            {getLabel(t('auth.email'), true)}
                         </label>
                     </div>
 
@@ -142,7 +145,7 @@ export default function Signup() {
                             placeholder=" "
                         />
                         <label htmlFor="username" className={labelClass}>
-                            {getLabel("Username", true)}
+                            {getLabel(t('auth.username'), true)}
                         </label>
                     </div>
 
@@ -158,7 +161,7 @@ export default function Signup() {
                             placeholder=" "
                         />
                         <label htmlFor="phoneNumber" className={labelClass}>
-                            {getLabel("Phone Number", true)}
+                            {getLabel(t('auth.phoneNumber'), true)}
                         </label>
                     </div>
 
@@ -174,7 +177,7 @@ export default function Signup() {
                             placeholder=" "
                         />
                         <label htmlFor="age" className={labelClass}>
-                            {getLabel("Age", false)}
+                            {getLabel(t('auth.age'), false)}
                         </label>
                     </div>
 
@@ -187,7 +190,7 @@ export default function Signup() {
                             placeholder=" "
                         />
                         <label htmlFor="occupation" className={labelClass}>
-                            {getLabel("Occupation", false)}
+                            {getLabel(t('auth.occupation'), false)}
                         </label>
                     </div>
 
@@ -202,7 +205,7 @@ export default function Signup() {
                             placeholder=" "
                         />
                         <label htmlFor="password" className={labelClass}>
-                            {getLabel("Password", true)}
+                            {getLabel(t('auth.password'), true)}
                         </label>
                     </div>
 
@@ -217,7 +220,7 @@ export default function Signup() {
                             placeholder=" "
                         />
                         <label htmlFor="confirmPassword" className={labelClass}>
-                            {getLabel("Confirm Password", true)}
+                            {getLabel(t('auth.confirmPassword'), true)}
                         </label>
                     </div>
                     <div className="flex items-center justify-between">
@@ -228,7 +231,7 @@ export default function Signup() {
                                 className="h-4 w-4 text-green-600 border-gray-300 rounded-bl focus:ring-green-500"
                             />
                             <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-700 dark:text-gray-300">
-                                Remember me
+                                {t('auth.rememberMe')}
                             </label>
                         </div>
                     </div>
@@ -243,15 +246,15 @@ export default function Signup() {
                         disabled={loading}
                         className="text-white bg-green-600 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center dark:bg-green-500 dark:hover:bg-green-600 dark:focus:ring-green-800"
                     >
-                        {loading ? "Creating Account..." : "Create Account"}
+                        {loading ? t('auth.creatingAccount') : t('auth.createAccount')}
                     </Button>
                 </form>
 
                 <div className="mt-6 text-center">
                     <p className="text-sm text-gray-600 dark:text-gray-300">
-                        Already have an account?{" "}
+                        {t('auth.hasAccount')}{" "}
                         <Link to="/login" className="text-green-600 hover:text-green-500 dark:text-green-400">
-                            Sign in
+                            {t('auth.signIn')}
                         </Link>
                     </p>
                 </div>

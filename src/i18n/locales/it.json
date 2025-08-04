@@ -1,0 +1,81 @@
+{
+  "settings": {
+    "title": "Impostazioni",
+    "subtitle": "Gestisci le tue preferenze dell'account e le impostazioni dell'applicazione",
+    "account": "Account",
+    "appearance": "Aspetto",
+    "notifications": "Notifiche",
+    "privacy": "Privacy e Sicurezza",
+    "financial": "Finanziario",
+    "dataManagement": "Gestione Dati",
+    "theme": "Tema",
+    "themeSubtitle": "Scegli il tuo tema preferito",
+    "language": "Lingua",
+    "languageSubtitle": "Seleziona la tua lingua preferita",
+    "switchTo": "Passa a",
+    "dark": "Scuro",
+    "light": "Chiaro",
+    "languageChanged": "Lingua cambiata in"
+  },
+  "navigation": {
+    "dashboard": "Dashboard",
+    "profile": "Profilo",
+    "settings": "Impostazioni",
+    "signOut": "Disconnetti"
+  },
+  "common": {
+    "loading": "Caricamento...",
+    "save": "Salva",
+    "cancel": "Annulla",
+    "confirm": "Conferma",
+    "delete": "Elimina",
+    "edit": "Modifica",
+    "close": "Chiudi",
+    "submit": "Invia",
+    "back": "Indietro",
+    "next": "Avanti",
+    "previous": "Precedente",
+    "search": "Cerca",
+    "filter": "Filtra",
+    "reset": "Reimposta"
+  },
+  "auth": {
+    "login": "Accedi",
+    "signup": "Registrati",
+    "logout": "Disconnetti",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Conferma Password",
+    "rememberMe": "Ricordami",
+    "forgotPassword": "Password dimenticata?",
+    "dontHaveAccount": "Non hai un account?",
+    "alreadyHaveAccount": "Hai già un account?"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "welcome": "Bentornato",
+    "totalBalance": "Saldo Totale",
+    "income": "Entrate",
+    "expenses": "Spese",
+    "savings": "Risparmi"
+  },
+  "transactions": {
+    "title": "Transazioni",
+    "addNew": "Aggiungi Nuova Transazione",
+    "recent": "Transazioni Recenti",
+    "amount": "Importo",
+    "description": "Descrizione",
+    "category": "Categoria",
+    "date": "Data",
+    "type": "Tipo"
+  },
+  "profile": {
+    "title": "Profilo",
+    "personalInfo": "Informazioni Personali",
+    "firstName": "Nome",
+    "lastName": "Cognome",
+    "phone": "Numero di Telefono",
+    "address": "Indirizzo",
+    "dateOfBirth": "Data di Nascita"
+  }
+}

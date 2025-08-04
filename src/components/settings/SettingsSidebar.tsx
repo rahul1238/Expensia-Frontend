@@ -35,7 +35,7 @@ export const SettingsSidebar: React.FC<SettingsSidebarProps> = ({
                 {section.icon}
               </span>
               <span className="font-medium">
-                {t.settings[section.translationKey as keyof typeof t.settings]}
+                {t(`settings.${section.translationKey}`)}
               </span>
             </button>
           ))}

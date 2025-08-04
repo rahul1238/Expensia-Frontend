@@ -1,0 +1,81 @@
+{
+  "settings": {
+    "title": "Настройки",
+    "subtitle": "Управление настройками учетной записи и приложения",
+    "account": "Аккаунт",
+    "appearance": "Внешний вид",
+    "notifications": "Уведомления",
+    "privacy": "Конфиденциальность и безопасность",
+    "financial": "Финансы",
+    "dataManagement": "Управление данными",
+    "theme": "Тема",
+    "themeSubtitle": "Выберите предпочитаемую тему",
+    "language": "Язык",
+    "languageSubtitle": "Выберите предпочитаемый язык",
+    "switchTo": "Переключить на",
+    "dark": "Темная",
+    "light": "Светлая",
+    "languageChanged": "Язык изменен на"
+  },
+  "navigation": {
+    "dashboard": "Панель управления",
+    "profile": "Профиль",
+    "settings": "Настройки",
+    "signOut": "Выйти"
+  },
+  "common": {
+    "loading": "Загрузка...",
+    "save": "Сохранить",
+    "cancel": "Отмена",
+    "confirm": "Подтвердить",
+    "delete": "Удалить",
+    "edit": "Редактировать",
+    "close": "Закрыть",
+    "submit": "Отправить",
+    "back": "Назад",
+    "next": "Далее",
+    "previous": "Предыдущий",
+    "search": "Поиск",
+    "filter": "Фильтр",
+    "reset": "Сброс"
+  },
+  "auth": {
+    "login": "Войти",
+    "signup": "Регистрация",
+    "logout": "Выйти",
+    "email": "Email",
+    "password": "Пароль",
+    "confirmPassword": "Подтвердить пароль",
+    "rememberMe": "Запомнить меня",
+    "forgotPassword": "Забыли пароль?",
+    "dontHaveAccount": "Нет аккаунта?",
+    "alreadyHaveAccount": "Уже есть аккаунт?"
+  },
+  "dashboard": {
+    "title": "Панель управления",
+    "welcome": "Добро пожаловать",
+    "totalBalance": "Общий баланс",
+    "income": "Доходы",
+    "expenses": "Расходы",
+    "savings": "Сбережения"
+  },
+  "transactions": {
+    "title": "Транзакции",
+    "addNew": "Добавить новую транзакцию",
+    "recent": "Недавние транзакции",
+    "amount": "Сумма",
+    "description": "Описание",
+    "category": "Категория",
+    "date": "Дата",
+    "type": "Тип"
+  },
+  "profile": {
+    "title": "Профиль",
+    "personalInfo": "Личная информация",
+    "firstName": "Имя",
+    "lastName": "Фамилия",
+    "phone": "Номер телефона",
+    "address": "Адрес",
+    "dateOfBirth": "Дата рождения"
+  }
+}

@@ -41,7 +41,7 @@ export const NotificationSettings: React.FC<NotificationSettingsProps> = ({
     <div className="space-y-6">
       <div>
         <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
-          {t.settings.notifications}
+          {t('settings.notifications')}
         </h2>
       </div>
 

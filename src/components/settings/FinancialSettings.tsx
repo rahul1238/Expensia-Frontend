@@ -42,7 +42,7 @@ export const FinancialSettings: React.FC<FinancialSettingsProps> = ({
     <div className="space-y-6">
       <div>
         <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
-          {t.settings.financial}
+          {t('settings.financial')}
         </h2>
       </div>
 

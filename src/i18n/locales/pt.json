@@ -1,0 +1,81 @@
+{
+  "settings": {
+    "title": "Configurações",
+    "subtitle": "Gerencie suas preferências de conta e configurações do aplicativo",
+    "account": "Conta",
+    "appearance": "Aparência",
+    "notifications": "Notificações",
+    "privacy": "Privacidade e Segurança",
+    "financial": "Financeiro",
+    "dataManagement": "Gerenciamento de Dados",
+    "theme": "Tema",
+    "themeSubtitle": "Escolha seu tema preferido",
+    "language": "Idioma",
+    "languageSubtitle": "Selecione seu idioma preferido",
+    "switchTo": "Mudar para",
+    "dark": "Escuro",
+    "light": "Claro",
+    "languageChanged": "Idioma alterado para"
+  },
+  "navigation": {
+    "dashboard": "Painel",
+    "profile": "Perfil",
+    "settings": "Configurações",
+    "signOut": "Sair"
+  },
+  "common": {
+    "loading": "Carregando...",
+    "save": "Salvar",
+    "cancel": "Cancelar",
+    "confirm": "Confirmar",
+    "delete": "Deletar",
+    "edit": "Editar",
+    "close": "Fechar",
+    "submit": "Enviar",
+    "back": "Voltar",
+    "next": "Próximo",
+    "previous": "Anterior",
+    "search": "Pesquisar",
+    "filter": "Filtrar",
+    "reset": "Resetar"
+  },
+  "auth": {
+    "login": "Entrar",
+    "signup": "Cadastrar",
+    "logout": "Sair",
+    "email": "Email",
+    "password": "Senha",
+    "confirmPassword": "Confirmar Senha",
+    "rememberMe": "Lembrar de mim",
+    "forgotPassword": "Esqueceu a senha?",
+    "dontHaveAccount": "Não tem uma conta?",
+    "alreadyHaveAccount": "Já tem uma conta?"
+  },
+  "dashboard": {
+    "title": "Painel",
+    "welcome": "Bem-vindo de volta",
+    "totalBalance": "Saldo Total",
+    "income": "Receita",
+    "expenses": "Despesas",
+    "savings": "Economias"
+  },
+  "transactions": {
+    "title": "Transações",
+    "addNew": "Adicionar Nova Transação",
+    "recent": "Transações Recentes",
+    "amount": "Valor",
+    "description": "Descrição",
+    "category": "Categoria",
+    "date": "Data",
+    "type": "Tipo"
+  },
+  "profile": {
+    "title": "Perfil",
+    "personalInfo": "Informações Pessoais",
+    "firstName": "Nome",
+    "lastName": "Sobrenome",
+    "phone": "Número de Telefone",
+    "address": "Endereço",
+    "dateOfBirth": "Data de Nascimento"
+  }
+}

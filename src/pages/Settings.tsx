@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { logOut } from '../feature/auth/authSlice';
-import { setLanguage, type LanguageCode } from '../feature/language/languageSlice';
+import { type LanguageCode } from '../feature/language/languageSlice';
 import { useTranslation } from '../hooks/useTranslation';
 import { SettingsSidebar } from '../components/settings/SettingsSidebar';
 import { AppearanceSettings } from '../components/settings/AppearanceSettings';
@@ -41,7 +41,7 @@ interface FinancialSettings {
 
 const Settings: React.FC = () => {
   const { user } = useSelector((state: RootState) => state.auth);
-  const { t } = useTranslation();
+  const { t, changeLanguage } = useTranslation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -54,9 +54,9 @@ const Settings: React.FC = () => {
   const [saveMessage, setSaveMessage] = useState<string>('');
 
   // Handle language and theme changes
-  const handleLanguageChange = (languageCode: LanguageCode) => {
+  const handleLanguageChange = async (languageCode: LanguageCode) => {
     // Show message with current language first
-    const currentTranslation = t.settings.languageChanged;
+    const currentTranslation = t('settings.languageChanged');
     
     // Get the new language name from constants
     const selectedLanguage = LANGUAGE_OPTIONS.find(lang => lang.code === languageCode);
@@ -64,8 +64,8 @@ const Settings: React.FC = () => {
     
     setSaveMessage(`${currentTranslation} ${languageName}`);
     
-    // Update the language in Redux
-    dispatch(setLanguage(languageCode));
+    // Update the language using i18n
+    await changeLanguage(languageCode);
     
     // Clear message after language change
     setTimeout(() => setSaveMessage(''), MESSAGE_DURATION);
@@ -124,9 +124,9 @@ const Settings: React.FC = () => {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">{t.settings.title}</h1>
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">{t('settings.title')}</h1>
           <p className="text-gray-500 dark:text-gray-400 mt-2">
-            {t.settings.subtitle}
+            {t('settings.subtitle')}
           </p>
         </div>
 
@@ -323,7 +323,7 @@ const Settings: React.FC = () => {
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
                   </svg>
-                  <span>{t.navigation.signOut}</span>
+                  <span>{t('navigation.signOut')}</span>
                 </button>
               </div>
             </div>

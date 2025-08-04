@@ -1,7 +1,10 @@
 import { Link } from "react-router-dom";
 import Logo from "./Logo";
+import { useTranslation } from "../hooks/useTranslation";
 
 export default function Footer() {
+  const { t } = useTranslation();
+  
   return (
     <footer className="bg-gray-900 text-white pt-12 pb-6 mt-6">
       <div className="max-w-7xl mx-auto px-4">
@@ -12,7 +15,7 @@ export default function Footer() {
               <Logo size={40} />
             </Link>
             <p className="text-gray-400 mb-4">
-              Modern financial management for everyone. Track expenses, analyze spending, and plan your future.
+              {t('common.companyDescription')}
             </p>
             <div className="flex space-x-4">
               <a href="#" className="text-gray-400 hover:text-white transition-colors" title="Facebook" aria-label="Visit our Facebook page">
@@ -40,32 +43,32 @@ export default function Footer() {
 
           {/* Links */}
           <div className="col-span-1">
-            <h3 className="text-lg font-semibold mb-4">Company</h3>
+            <h3 className="text-lg font-semibold mb-4">{t('common.company')}</h3>
             <ul className="space-y-2">
-              <li><Link to="/about" className="text-gray-400 hover:text-white transition-colors">About Us</Link></li>
-              <li><Link to="/team" className="text-gray-400 hover:text-white transition-colors">Our Team</Link></li>
-              <li><Link to="/careers" className="text-gray-400 hover:text-white transition-colors">Careers</Link></li>
-              <li><Link to="/contact" className="text-gray-400 hover:text-white transition-colors">Contact Us</Link></li>
+              <li><Link to="/about" className="text-gray-400 hover:text-white transition-colors">{t('common.aboutUs')}</Link></li>
+              <li><Link to="/team" className="text-gray-400 hover:text-white transition-colors">{t('common.ourTeam')}</Link></li>
+              <li><Link to="/careers" className="text-gray-400 hover:text-white transition-colors">{t('common.careers')}</Link></li>
+              <li><Link to="/contact" className="text-gray-400 hover:text-white transition-colors">{t('common.contactUs')}</Link></li>
             </ul>
           </div>
 
           <div className="col-span-1">
-            <h3 className="text-lg font-semibold mb-4">Resources</h3>
+            <h3 className="text-lg font-semibold mb-4">{t('common.resources')}</h3>
             <ul className="space-y-2">
-              <li><Link to="/blog" className="text-gray-400 hover:text-white transition-colors">Blog</Link></li>
-              <li><Link to="/guides" className="text-gray-400 hover:text-white transition-colors">Guides</Link></li>
-              <li><Link to="/help" className="text-gray-400 hover:text-white transition-colors">Help Center</Link></li>
-              <li><Link to="/api" className="text-gray-400 hover:text-white transition-colors">API Documentation</Link></li>
+              <li><Link to="/blog" className="text-gray-400 hover:text-white transition-colors">{t('common.blog')}</Link></li>
+              <li><Link to="/guides" className="text-gray-400 hover:text-white transition-colors">{t('common.guides')}</Link></li>
+              <li><Link to="/help" className="text-gray-400 hover:text-white transition-colors">{t('common.helpCenter')}</Link></li>
+              <li><Link to="/api" className="text-gray-400 hover:text-white transition-colors">{t('common.apiDocs')}</Link></li>
             </ul>
           </div>
 
           <div className="col-span-1">
-            <h3 className="text-lg font-semibold mb-4">Legal</h3>
+            <h3 className="text-lg font-semibold mb-4">{t('common.legal')}</h3>
             <ul className="space-y-2">
-              <li><Link to="/privacy" className="text-gray-400 hover:text-white transition-colors">Privacy Policy</Link></li>
-              <li><Link to="/terms" className="text-gray-400 hover:text-white transition-colors">Terms of Service</Link></li>
-              <li><Link to="/cookies" className="text-gray-400 hover:text-white transition-colors">Cookie Policy</Link></li>
-              <li><Link to="/security" className="text-gray-400 hover:text-white transition-colors">Security</Link></li>
+              <li><Link to="/privacy" className="text-gray-400 hover:text-white transition-colors">{t('common.privacyPolicy')}</Link></li>
+              <li><Link to="/terms" className="text-gray-400 hover:text-white transition-colors">{t('common.termsOfService')}</Link></li>
+              <li><Link to="/cookies" className="text-gray-400 hover:text-white transition-colors">{t('common.cookiePolicy')}</Link></li>
+              <li><Link to="/security" className="text-gray-400 hover:text-white transition-colors">{t('common.security')}</Link></li>
             </ul>
           </div>
         </div>
@@ -73,12 +76,12 @@ export default function Footer() {
         <div className="border-t border-gray-800 pt-6 mt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-gray-500 text-sm mb-4 md:mb-0">
-              © {new Date().getFullYear()} Expensia. All rights reserved.
+              © {new Date().getFullYear()} Expensia. {t('common.allRightsReserved')}
             </p>
             <div className="flex space-x-6">
-              <Link to="/help" className="text-gray-500 hover:text-white text-sm transition-colors">Help</Link>
-              <Link to="/status" className="text-gray-500 hover:text-white text-sm transition-colors">Status</Link>
-              <Link to="/sitemap" className="text-gray-500 hover:text-white text-sm transition-colors">Sitemap</Link>
+              <Link to="/help" className="text-gray-500 hover:text-white text-sm transition-colors">{t('common.help')}</Link>
+              <Link to="/status" className="text-gray-500 hover:text-white text-sm transition-colors">{t('common.status')}</Link>
+              <Link to="/sitemap" className="text-gray-500 hover:text-white text-sm transition-colors">{t('common.sitemap')}</Link>
             </div>
           </div>
         </div>

@@ -1,6 +1,7 @@
 import "./App.css";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import LanguageSync from "./components/LanguageSync";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Routes, Route, useLocation } from "react-router-dom";
@@ -68,6 +69,7 @@ function App() {
 
   return (
     <div className="min-h-screen w-full overflow-x-hidden bg-white dark:bg-gray-900 text-gray-900 dark:text-white transition-colors duration-300">
+      <LanguageSync />
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
