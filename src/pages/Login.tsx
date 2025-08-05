@@ -6,13 +6,15 @@ import Button from "../components/ui/Button";
 import Card from "../components/ui/Card";
 import Heading from "../components/ui/Heading";
 import { userService } from "../services/userService";
+import { useTranslation } from "../hooks/useTranslation";
 
 export default function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
-
+    
+    const { t } = useTranslation();
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const location = useLocation();
@@ -24,12 +26,12 @@ export default function Login() {
     useEffect(() => {
         const searchParams = new URLSearchParams(location.search);
         if (searchParams.get('expired') === 'true') {
-            setError('Your session has expired. Please log in again.');
+            setError(t('auth.sessionExpired'));
             
             // Clean up the URL to prevent showing the error on refresh
             navigate('/login', { replace: true });
         }
-    }, [location.search, navigate]);
+    }, [location.search, navigate, t]);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -37,14 +39,14 @@ export default function Login() {
         setError(null);
 
         if (!email || !password) {
-            setError("Email and password are required.");
+            setError(t('auth.requiredFields'));
             setLoading(false);
             return;
         }
 
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) {
-            setError("Please enter a valid email address");
+            setError(t('auth.invalidEmail'));
             setLoading(false);
             return;
         }
@@ -56,7 +58,7 @@ export default function Login() {
             const data = await userService.login(email, password, rememberMe);
 
             if (!data || !data.user) {
-                setError("Invalid response from server.");
+                setError(t('errors.serverError'));
                 setLoading(false);
                 return;
             }
@@ -70,7 +72,7 @@ export default function Login() {
             console.log("Login successful, navigating to:", from);
             navigate(from, { replace: true });
         } catch (error) {
-            setError(error instanceof Error ? error.message : "An unexpected error occurred.");
+            setError(error instanceof Error ? error.message : t('errors.unexpected'));
         } finally {
             setLoading(false);
         }
@@ -85,10 +87,10 @@ export default function Login() {
             <Card className="w-full max-w-md">
                 <div className="text-center mb-6">
                     <Heading level={1} className="text-2xl font-bold dark:text-white">
-                        Welcome Back
+                        {t('auth.welcomeBack')}
                     </Heading>
                     <p className="text-gray-600 dark:text-gray-300">
-                        Sign in to continue to Expensia
+                        {t('auth.signInToContinue')}
                     </p>
                 </div>
 
@@ -104,7 +106,7 @@ export default function Login() {
                             placeholder=" "
                         />
                         <label htmlFor="email" className={labelClass}>
-                            Email
+                            {t('auth.email')}
                         </label>
                     </div>
 
@@ -119,7 +121,7 @@ export default function Login() {
                             placeholder=" "
                         />
                         <label htmlFor="password" className={labelClass}>
-                            Password
+                            {t('auth.password')}
                         </label>
                     </div>
 
@@ -131,12 +133,12 @@ export default function Login() {
                                 className="h-4 w-4 text-green-600 border-gray-300 rounded-bl focus:ring-green-500"
                             />
                             <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-700 dark:text-gray-300">
-                                Remember me
+                                {t('auth.rememberMe')}
                             </label>
                         </div>
 
                         <Link to="/forgot-password" className="text-sm text-green-600 hover:text-green-500 dark:text-green-400">
-                            Forgot your password?
+                            {t('auth.forgotPassword')}
                         </Link>
                     </div>
 
@@ -146,7 +148,7 @@ export default function Login() {
                             className="text-white bg-green-600 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center dark:bg-green-500 dark:hover:bg-green-600 dark:focus:ring-green-800"
                             disabled={loading}
                         >
-                            {loading ? "Signing in..." : "Sign In"}
+                            {loading ? t('auth.signingIn') : t('auth.signIn')}
                         </Button>
                     </div>
                 </form>
@@ -157,9 +159,9 @@ export default function Login() {
                 )}
                 <div className="mt-6 text-center">
                     <p className="text-sm text-gray-600 dark:text-gray-300">
-                        Don't have an account?{" "}
+                        {t('auth.noAccount')}{" "}
                         <Link to="/signup" className="text-green-600 hover:text-green-500 dark:text-green-400">
-                            Sign up
+                            {t('auth.signUp')}
                         </Link>
                     </p>
                 </div>

@@ -1,6 +1,6 @@
 import api from "./apiService";
 import axios from "axios";
-import type { AuthResponse } from "../types/auth";
+import type { AuthResponse, User } from "../types/auth";
 import type { SignupDTO } from "../types/dto/dtos";
 
 export const userService = {
@@ -13,7 +13,7 @@ export const userService = {
       if (!email || !email.trim()) {
         throw new Error("Email is required");
       }
-      
+
       if (!password) {
         throw new Error("Password is required");
       }
@@ -23,7 +23,7 @@ export const userService = {
         password,
         rememberMe,
       });
-      
+
       return response.data;
     } catch (error) {
       if (axios.isAxiosError(error)) {
@@ -70,23 +70,27 @@ export const userService = {
         "remember-me"
       ) as HTMLInputElement;
       const rememberMe = rememberMeEl?.checked || false;
-      
+
       const requestData = { ...signUpDTO, rememberMe };
-      
+
       if (signUpDTO.name && (!signUpDTO.firstName || !signUpDTO.lastName)) {
-        const nameParts = signUpDTO.name.split(' ');
+        const nameParts = signUpDTO.name.split(" ");
         requestData.firstName = requestData.firstName || nameParts[0];
-        requestData.lastName = requestData.lastName || 
-          nameParts.slice(1).join(' ') || 
-          signUpDTO.firstName || 
-          '';
-        
+        requestData.lastName =
+          requestData.lastName ||
+          nameParts.slice(1).join(" ") ||
+          signUpDTO.firstName ||
+          "";
+
         if (!requestData.username) {
-          requestData.username = signUpDTO.email.split('@')[0];
+          requestData.username = signUpDTO.email.split("@")[0];
         }
       }
 
-      const response = await api.post<AuthResponse>("/auth/register", requestData);
+      const response = await api.post<AuthResponse>(
+        "/auth/register",
+        requestData
+      );
       return response.data;
     } catch (error) {
       if (axios.isAxiosError(error)) {
@@ -113,19 +117,22 @@ export const userService = {
       return false;
     }
   },
-  
+
   async refreshToken(): Promise<boolean> {
     try {
       const REFRESH_COOLDOWN_MS = 5000;
-      const lastRefreshAttempt = sessionStorage.getItem('lastRefreshAttempt');
+      const lastRefreshAttempt = sessionStorage.getItem("lastRefreshAttempt");
       const currentTime = Date.now();
-      
-      if (lastRefreshAttempt && currentTime - parseInt(lastRefreshAttempt) < REFRESH_COOLDOWN_MS) {
+
+      if (
+        lastRefreshAttempt &&
+        currentTime - parseInt(lastRefreshAttempt) < REFRESH_COOLDOWN_MS
+      ) {
         return false;
       }
-      
-      sessionStorage.setItem('lastRefreshAttempt', currentTime.toString());
-      
+
+      sessionStorage.setItem("lastRefreshAttempt", currentTime.toString());
+
       const response = await axios.post(
         `${api.defaults.baseURL}/auth/refresh`,
         {},
@@ -134,15 +141,87 @@ export const userService = {
           headers: { "Content-Type": "application/json" },
         }
       );
-      
+
       if (response.status === 200) {
-        sessionStorage.removeItem('lastRefreshAttempt');
+        sessionStorage.removeItem("lastRefreshAttempt");
         return true;
       }
-      
+
       return false;
     } catch (error) {
       return false;
+    }
+  },
+
+  async updateProfile(profileData: {
+    firstName: string;
+    lastName: string;
+    email: string;
+    phoneNumber: string;
+    age: number | undefined;
+  }): Promise<User> {
+    try {
+      const response = await api.put("/user/profile", profileData);
+
+      if (response.status === 200 && response.data) {
+        return response.data;
+      }
+
+      throw new Error("Failed to update profile");
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        if (error.response?.status === 400) {
+          throw new Error(
+            error.response.data?.message || "Invalid profile data"
+          );
+        }
+        if (error.response?.status === 409) {
+          throw new Error("Email already exists");
+        }
+        if (error.response?.status === 401) {
+          throw new Error("Please log in again");
+        }
+        throw new Error(
+          error.response?.data?.message || "Failed to update profile"
+        );
+      }
+      throw new Error("An unexpected error occurred while updating profile");
+    }
+  },
+
+  async changePassword(
+    currentPassword: string,
+    newPassword: string
+  ): Promise<void> {
+    try {
+      const response = await api.put("/user/change-password", {
+        currentPassword,
+        newPassword,
+      });
+
+      if (response.status === 200) {
+        return;
+      }
+
+      throw new Error("Failed to change password");
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        if (error.response?.status === 400) {
+          throw new Error(
+            error.response.data?.message || "Invalid password data"
+          );
+        }
+        if (error.response?.status === 401) {
+          throw new Error("Current password is incorrect");
+        }
+        if (error.response?.status === 403) {
+          throw new Error("Please log in again");
+        }
+        throw new Error(
+          error.response?.data?.message || "Failed to change password"
+        );
+      }
+      throw new Error("An unexpected error occurred while changing password");
     }
   },
 };
