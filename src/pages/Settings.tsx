@@ -104,7 +104,7 @@ const Settings: React.FC = () => {
   // Handle account deletion
   const handleDeleteAccount = () => {
     // TODO: Implement account deletion
-    console.log('Account deletion requested');
+    setSaveMessage('Account deletion is not yet implemented.');
     setShowDeleteConfirm(false);
   };
 
