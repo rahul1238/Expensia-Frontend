@@ -1,6 +1,15 @@
-# React + TypeScript + Vite
+# Expensia Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern financial management application built with React, TypeScript, and Vite.
+
+## Features
+
+- 💰 Expense tracking and management
+- 📊 Financial analytics and reporting
+- 🌐 Multi-language support (12 languages)
+- 🎨 Light/Dark theme switching
+- 🔒 Secure authentication
+- 📱 Responsive design
 
 Currently, two official plugins are available:
 
@@ -39,31 +48,45 @@ export default tseslint.config([
 ])
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Internationalization (i18n)
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+This project supports 12 languages:
+- English, Hindi, Spanish, French, German, Italian
+- Portuguese, Chinese, Japanese, Korean, Arabic, Russian
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+For detailed information on working with translations, see [I18N_GUIDE.md](./I18N_GUIDE.md).
+
+### Maintaining Translations
+
+We've implemented an automated system to ensure translation key consistency across all language files:
+
+```bash
+# Run this to update all locale files with any missing keys
+./update_translations.sh
 ```
+
+## Development Setup
+
+1. Clone the repository
+```bash
+git clone https://github.com/rahul1238/Expensia-Frontend.git
+cd Expensia-Frontend
+```
+
+2. Install dependencies
+```bash
+npm install
+```
+
+3. Start the development server
+```bash
+npm run dev
+```
+
+## Available Scripts
+
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run lint` - Lint the code
+- `npm run preview` - Preview the production build
+- `./update_translations.sh` - Update translation files

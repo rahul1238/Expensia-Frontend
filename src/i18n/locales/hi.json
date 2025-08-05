@@ -34,7 +34,10 @@
     "login": "लॉग इन",
     "signup": "साइन अप",
     "logout": "लॉग आउट",
-    "darkMode": "डार्क मोड"
+    "darkMode": "डार्क मोड",
+    "addTransaction": "लेन-देन जोड़ें",
+    "manageTransactions": "लेन-देन प्रबंधित करें",
+    "viewAllTransactions": "सभी लेन-देन देखें"
   },
   "home": {
     "keyFeatures": "मुख्य विशेषताएं",
@@ -160,7 +163,11 @@
     "today": "आज",
     "thisWeek": "इस सप्ताह",
     "thisMonth": "इस महीने",
-    "filterBy": "फ़िल्टर करें"
+    "filterBy": "फ़िल्टर करें",
+    "addYourFirstTransaction": "अपना पहला लेन-देन जोड़ें",
+    "loadingTransactions": "लेन-देन लोड हो रहा है...",
+    "noTransactionsFound": "कोई लेन-देन नहीं मिला",
+    "recentTransactions": "हाल के लेन-देन"
   },
   "profile": {
     "title": "प्रोफ़ाइल",

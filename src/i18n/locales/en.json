@@ -34,7 +34,10 @@
     "login": "Login",
     "signup": "Sign Up",
     "logout": "Logout",
-    "darkMode": "Dark Mode"
+    "darkMode": "Dark Mode",
+    "addTransaction": "Add Transaction",
+    "manageTransactions": "Manage Transactions",
+    "viewAllTransactions": "View All Transactions"
   },
   "home": {
     "keyFeatures": "Key Features",
@@ -53,7 +56,11 @@
     "supportAvailability": "Support Availability",
     "readyToTakeControl": "Ready to take control?",
     "joinToday": "Join Expensia today and start your smarter financial journey.",
-    "signUpNow": "Sign Up Now"
+    "signUpNow": "Sign Up Now",
+    "heroTitle": "Manage Your Finances Effortlessly with Expensia",
+    "heroSubtitle": "Track expenses, analyze spending, and plan your future in a smarter way than ever before.",
+    "goToDashboard": "Go to Dashboard",
+    "getStarted": "Get Started"
   },
   "common": {
     "loading": "Loading...",
@@ -75,7 +82,27 @@
     "success": "Success",
     "error": "Error",
     "warning": "Warning",
-    "info": "Information"
+    "info": "Information",
+    "companyDescription": "Modern financial management for everyone. Track expenses, analyze spending, and plan your future.",
+    "company": "Company",
+    "aboutUs": "About Us",
+    "ourTeam": "Our Team",
+    "careers": "Careers",
+    "contactUs": "Contact Us",
+    "resources": "Resources",
+    "blog": "Blog",
+    "guides": "Guides",
+    "helpCenter": "Help Center",
+    "apiDocs": "API Documentation",
+    "legal": "Legal",
+    "privacyPolicy": "Privacy Policy",
+    "termsOfService": "Terms of Service",
+    "cookiePolicy": "Cookie Policy",
+    "security": "Security",
+    "allRightsReserved": "All Rights Reserved.",
+    "help": "Help",
+    "status": "Status",
+    "sitemap": "Sitemap"
   },
   "auth": {
     "login": "Login",
@@ -89,7 +116,24 @@
     "dontHaveAccount": "Don't have an account?",
     "alreadyHaveAccount": "Already have an account?",
     "welcomeBack": "Welcome back!",
-    "createAccount": "Create your account"
+    "createAccount": "Create your account",
+    "signInToContinue": "Sign in to continue to Expensia",
+    "joinExpensia": "Join Expensia and take control of your finances",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "username": "Username",
+    "phoneNumber": "Phone Number",
+    "age": "Age",
+    "occupation": "Occupation",
+    "signingIn": "Signing in...",
+    "signIn": "Sign In",
+    "creatingAccount": "Creating account...",
+    "noAccount": "Don't have an account?",
+    "hasAccount": "Already have an account?",
+    "sessionExpired": "Your session has expired. Please log in again.",
+    "requiredFields": "Email and password are required.",
+    "invalidEmail": "Please enter a valid email address",
+    "passwordsMismatch": "Passwords do not match!"
   },
   "dashboard": {
     "title": "Dashboard",
@@ -119,7 +163,11 @@
     "today": "Today",
     "thisWeek": "This Week",
     "thisMonth": "This Month",
-    "filterBy": "Filter by"
+    "filterBy": "Filter by",
+    "addYourFirstTransaction": "Add your first transaction",
+    "loadingTransactions": "Loading transactions...",
+    "noTransactionsFound": "No transactions found",
+    "recentTransactions": "Recent Transactions"
   },
   "profile": {
     "title": "Profile",
@@ -141,6 +189,7 @@
     "networkError": "Network error. Please try again.",
     "serverError": "Server error. Please try again later.",
     "notFound": "Page not found",
-    "unauthorized": "You are not authorized to access this page"
+    "unauthorized": "You are not authorized to access this page",
+    "unexpected": "An unexpected error occurred"
   }
 }
