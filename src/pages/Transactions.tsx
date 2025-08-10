@@ -51,34 +51,18 @@ const Transactions: React.FC = () => {
     }
   };
 
-  const handleAddTransaction = async (transactionData: TransactionData) => {
-    try {
-      const newTransaction = await transactionService.createTransaction(transactionData);
-      setTransactions(prev => [newTransaction, ...prev]);
-      setIsAddModalOpen(false);
-      setTotalCount(prev => prev + 1);
-    } catch (err) {
-      console.error('Error creating transaction:', err);
-      throw err; // Let the form handle the error display
-    }
+
+  const handleAddTransaction = (createdTransaction: TransactionData) => {
+    setTransactions(prev => [createdTransaction, ...prev]);
+    setIsAddModalOpen(false);
+    setTotalCount(prev => prev + 1);
   };
 
-  const handleEditTransaction = async (transactionData: TransactionData) => {
-    if (!editingTransaction?.id) return;
-
-    try {
-      const updatedTransaction = await transactionService.updateTransaction(
-        editingTransaction.id,
-        transactionData
-      );
-      setTransactions(prev =>
-        prev.map(t => t.id === editingTransaction.id ? updatedTransaction : t)
-      );
-      setEditingTransaction(null);
-    } catch (err) {
-      console.error('Error updating transaction:', err);
-      throw err;
-    }
+  const handleEditTransaction = (updatedTransaction: TransactionData) => {
+    setTransactions(prev =>
+      prev.map(t => t.id === updatedTransaction.id ? updatedTransaction : t)
+    );
+    setEditingTransaction(null);
   };
 
   const handleDeleteTransaction = async (id: string) => {
