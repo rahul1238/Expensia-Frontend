@@ -3,6 +3,18 @@ import axios from "axios";
 import type { AuthResponse, User } from "../types/auth";
 import type { SignupDTO } from "../types/dto/dtos";
 
+const networkError = (msg: string) => new Error(msg);
+const extractMessage = (error: unknown, fallback: string) => {
+  if (axios.isAxiosError(error)) {
+    return (
+      error.response?.data?.message ||
+      (error.code === "ERR_NETWORK" ? "Network error. Please try again" : undefined) ||
+      fallback
+    );
+  }
+  return fallback;
+};
+
 export const userService = {
   async login(
     email: string,
@@ -39,6 +51,31 @@ export const userService = {
       }
 
       throw new Error("An unexpected error occurred. Please try again later");
+    }
+  },
+
+  async loginWithGoogle(credential: string): Promise<AuthResponse> {
+    try {
+      if (!credential) {
+        throw new Error("Missing Google credential");
+      }
+
+      const response = await api.post<AuthResponse>("/auth/google", { credential });
+      return response.data;
+    } catch (error) {
+      if (axios.isAxiosError(error) && error.response?.status === 401) {
+        throw networkError("Google authentication failed");
+      }
+      throw networkError(extractMessage(error, "Unable to sign in with Google"));
+    }
+  },
+
+  async getGoogleAuthUrl(): Promise<string> {
+    try {
+      const response = await api.get<{ authUrl: string }>("/auth/google");
+      return response.data?.authUrl;
+    } catch (error) {
+      throw new Error("Failed to fetch Google auth URL");
     }
   },
 

@@ -8,6 +8,7 @@ import Heading from "../components/ui/Heading";
 import type { AuthResponse } from "../types/auth";
 import type { SignupDTO } from "../types/dto/dtos";
 import { userService } from "../services/userService";
+import GoogleSignInButton from "../components/GoogleSignInButton";
 import { useTranslation } from "../hooks/useTranslation";
 
 export default function Signup() {
@@ -250,6 +251,7 @@ export default function Signup() {
                     </Button>
                 </form>
 
+                <GoogleSignInButton />
                 <div className="mt-6 text-center">
                     <p className="text-sm text-gray-600 dark:text-gray-300">
                         {t('auth.hasAccount')}{" "}

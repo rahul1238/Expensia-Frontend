@@ -127,6 +127,8 @@
     "occupation": "Occupation",
     "signingIn": "Signing in...",
     "signIn": "Sign In",
+    "signInWith": "Sign in with {{provider}}",
+    "continueWithGoogle": "Continue with Google",
     "creatingAccount": "Creating account...",
     "noAccount": "Don't have an account?",
     "hasAccount": "Already have an account?",
