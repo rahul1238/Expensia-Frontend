@@ -6,6 +6,7 @@ import Button from "../components/ui/Button";
 import Card from "../components/ui/Card";
 import Heading from "../components/ui/Heading";
 import { userService } from "../services/userService";
+import GoogleSignInButton from "../components/GoogleSignInButton";
 import { useTranslation } from "../hooks/useTranslation";
 
 export default function Login() {
@@ -157,11 +158,12 @@ export default function Login() {
                         {error}
                     </div>
                 )}
+                <GoogleSignInButton />
                 <div className="mt-6 text-center">
                     <p className="text-sm text-gray-600 dark:text-gray-300">
                         {t('auth.noAccount')}{" "}
                         <Link to="/signup" className="text-green-600 hover:text-green-500 dark:text-green-400">
-                            {t('auth.signUp')}
+                            {t('auth.signup')}
                         </Link>
                     </p>
                 </div>
