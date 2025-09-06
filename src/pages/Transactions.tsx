@@ -45,7 +45,6 @@ const Transactions: React.FC = () => {
       setTotalCount(response.totalCount || response.transactions.length);
     } catch (err) {
       setError('Failed to load transactions. Please try again.');
-      console.error('Error loading transactions:', err);
     } finally {
       setIsLoading(false);
     }
@@ -76,7 +75,6 @@ const Transactions: React.FC = () => {
       setTotalCount(prev => prev - 1);
     } catch (err) {
       setError('Failed to delete transaction. Please try again.');
-      console.error('Error deleting transaction:', err);
     }
   };
 
@@ -145,7 +143,7 @@ const Transactions: React.FC = () => {
             <div className="flex flex-col space-y-2">
               <span className="text-sm text-gray-500 dark:text-gray-400">Total Transaction</span>
               <span className="text-3xl font-bold text-gray-900 dark:text-white">
-                ₹{totalTransactions.toLocaleString()}
+                {totalTransactions.toLocaleString()}
               </span>
               <div className="flex items-center text-sm">
                 <span className="text-green-500 flex items-center">
@@ -476,7 +474,7 @@ const Transactions: React.FC = () => {
 
               <div className="text-center mb-6">
                 <div className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
-                  ₹{totalTransactions.toLocaleString()}
+                  {totalTransactions.toLocaleString()}
                 </div>
                 <div className="text-sm text-gray-500 dark:text-gray-400">
                   This month day sale volume is 4.6% large than last month

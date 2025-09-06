@@ -33,8 +33,7 @@ const Transaction: React.FC<TransactionProps> = ({ transaction }) => {
         month: 'short',
         year: 'numeric'
       });
-    } catch (e) {
-      console.error('Invalid date:', dateString);
+  } catch (e) {
       return new Date().toLocaleDateString('en-US', {
         day: 'numeric',
         month: 'short',

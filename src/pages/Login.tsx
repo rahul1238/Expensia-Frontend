@@ -70,7 +70,6 @@ export default function Login() {
 
             await userService.checkCookieStatus();
             
-            console.log("Login successful, navigating to:", from);
             navigate(from, { replace: true });
         } catch (error) {
             setError(error instanceof Error ? error.message : t('errors.unexpected'));

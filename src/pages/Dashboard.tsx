@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Card from '../components/ui/Card';
 import Button from '../components/ui/Button';
 import Section from '../components/ui/Section';
+import GmailConnect from '../components/GmailConnect';
 import StatBox from '../components/ui/StatBox';
 import Transaction from '../components/Transaction';
 import Modal from '../components/Modal';
@@ -40,7 +41,6 @@ const Dashboard: React.FC = () => {
       const transactions = response.transactions || [];
       setTransactions(transactions);
 
-      console.log('Received transactions:', transactions);
 
       // Calculate summary from transactions data
       const totalIncome = transactions
@@ -58,7 +58,6 @@ const Dashboard: React.FC = () => {
       });
     } catch (err) {
       setError('Failed to load transactions');
-      console.error('Error fetching transactions:', err);
     } finally {
       setIsLoading(false);
     }
@@ -69,7 +68,6 @@ const Dashboard: React.FC = () => {
   }, []);
 
   const handleAddTransaction = (transaction: TransactionData) => {
-    console.log('New transaction created:', transaction);
 
     // Add an id if it doesn't exist
     if (!transaction.id) {
@@ -209,6 +207,10 @@ const Dashboard: React.FC = () => {
             </div>
           )}
         </Card>
+      </Section>
+
+      <Section className="py-6">
+        <GmailConnect />
       </Section>
 
       <Modal

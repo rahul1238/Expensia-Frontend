@@ -42,7 +42,7 @@ export default function GoogleSignInButton() {
         setShowFallback(false);
       }
     } catch (err) {
-      console.error('Google init failed', err);
+      setError('Google init failed');
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [clientId]);
@@ -56,7 +56,7 @@ export default function GoogleSignInButton() {
       script.defer = true;
       script.id = SCRIPT_ID;
       script.onload = initializeGoogle;
-      script.onerror = () => console.error('Failed to load Google script');
+  script.onerror = () => setError('Failed to load Google script');
       document.head.appendChild(script);
     } else {
       initializeGoogle();

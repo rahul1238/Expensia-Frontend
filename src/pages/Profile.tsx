@@ -87,7 +87,6 @@ const Profile: React.FC = () => {
                     isLoading: false,
                 });
             } catch (error) {
-                console.error('Failed to fetch transaction statistics:', error);
                 setStatistics(prev => ({ ...prev, isLoading: false }));
             }
         };
@@ -121,8 +120,7 @@ const Profile: React.FC = () => {
                 ...stats,
                 isLoading: false,
             });
-        } catch (error) {
-            console.error('Failed to refresh transaction statistics:', error);
+    } catch (error) {
             setStatistics(prev => ({ ...prev, isLoading: false }));
         }
     };
