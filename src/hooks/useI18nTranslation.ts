@@ -13,7 +13,7 @@ export const useTranslation = () => {
       await i18nInstance.changeLanguage(languageCode);
       dispatch(setLanguage(languageCode));
     } catch (error) {
-      console.error('Failed to change language:', error);
+      // no-op
     }
   };
 
