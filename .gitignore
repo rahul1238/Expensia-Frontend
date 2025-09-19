@@ -27,12 +27,8 @@ dist-ssr
 *.sln
 *.sw?
 
-# Backup files
-*_backup.json
-*_backup_*.json
-src/i18n/locales/backup/
-
-# Translation utility scripts
-update_locale_files.js
-update_translations.sh
-restore_hindi.js
+# Firebase
+.firebase/
+.firebaserc
+firebase-debug.log
+firebase-debug.*.log
