@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { type RootState } from '../app/store';
-import { setLanguage } from '../feature/language/languageSlice';
+import { setLanguage, type LanguageCode } from '../feature/language/languageSlice';
 
 /**
  * Component to sync i18next language with Redux state
@@ -17,7 +17,7 @@ export const LanguageSync: React.FC = () => {
     // Sync Redux with i18next on mount if they differ
     if (i18n.language !== language.code) {
       if (i18n.language && i18n.language !== 'dev') {
-        dispatch(setLanguage(i18n.language as any));
+        dispatch(setLanguage(i18n.language as LanguageCode));
       } else {
         i18n.changeLanguage(language.code);
       }
@@ -28,7 +28,7 @@ export const LanguageSync: React.FC = () => {
     // Listen to i18next language changes and sync Redux
     const handleLanguageChange = (lng: string) => {
       if (lng !== language.code && lng !== 'dev') {
-        dispatch(setLanguage(lng as any));
+        dispatch(setLanguage(lng as LanguageCode));
       }
     };
 

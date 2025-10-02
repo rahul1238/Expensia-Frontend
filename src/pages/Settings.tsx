@@ -101,7 +101,7 @@ const Settings: React.FC = () => {
     try {
       await userService.logout();
     } catch (error) {
-      console.error('Logout API call failed:', error);
+      console.error("Error:", error);
     } finally {
       dispatch(logOut());
       navigate('/');

@@ -25,7 +25,7 @@ export default function Navbar() {
     try {
       await userService.logout();
     } catch (error) {
-      console.error('Logout API call failed:', error);
+      console.error("Error:", error);
     } finally {
       dispatch(logOut());
       setShowProfileDropdown(false);

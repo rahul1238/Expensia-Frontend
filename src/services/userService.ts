@@ -74,7 +74,7 @@ export const userService = {
     try {
       const response = await api.get<{ authUrl: string }>("/auth/google");
       return response.data?.authUrl;
-    } catch (error) {
+    } catch (_error) {
       throw new Error("Failed to fetch Google auth URL");
     }
   },
@@ -88,7 +88,7 @@ export const userService = {
       }
 
       return response.data.user;
-    } catch (error) {
+    } catch (_error) {
       throw new Error("User not authenticated");
     }
   },
@@ -96,7 +96,7 @@ export const userService = {
   async logout(): Promise<void> {
     try {
       await api.post("/auth/logout");
-    } catch (error) {
+    } catch (_error) {
       // Silent failure is acceptable for logout
     }
   },
@@ -150,7 +150,7 @@ export const userService = {
         validateStatus: () => true,
       });
       return response.status === 200;
-    } catch (error) {
+    } catch (_error) {
       return false;
     }
   },
@@ -185,7 +185,7 @@ export const userService = {
       }
 
       return false;
-    } catch (error) {
+    } catch (_error) {
       return false;
     }
   },

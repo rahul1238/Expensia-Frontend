@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import Button from '../components/ui/Button';
 import Modal from '../components/Modal';
 import AddTransactionForm from '../components/AddTransactionForm';
@@ -18,9 +18,23 @@ const Transactions: React.FC = () => {
   const [activeFilters, setActiveFilters] = useState<TransactionFilters>({});
   const filterRef = useRef<HTMLDivElement>(null);
 
+  const loadTransactions = useCallback(async () => {
+    try {
+      setIsLoading(true);
+      setError(null);
+      const response = await transactionService.getTransactions(activeFilters);
+      setTransactions(response.transactions);
+      setTotalCount(response.totalCount || response.transactions.length);
+    } catch (_error) {
+      setError('Failed to load transactions. Please try again.');
+    } finally {
+      setIsLoading(false);
+    }
+  }, [activeFilters]);
+
   useEffect(() => {
     loadTransactions();
-  }, [activeFilters]);
+  }, [loadTransactions]);
 
   // Close filter dropdown when clicking outside
   useEffect(() => {
@@ -36,19 +50,7 @@ const Transactions: React.FC = () => {
     }
   }, [showFilters]);
 
-  const loadTransactions = async () => {
-    try {
-      setIsLoading(true);
-      setError(null);
-      const response = await transactionService.getTransactions(activeFilters);
-      setTransactions(response.transactions);
-      setTotalCount(response.totalCount || response.transactions.length);
-    } catch (err) {
-      setError('Failed to load transactions. Please try again.');
-    } finally {
-      setIsLoading(false);
-    }
-  };
+
 
 
   const handleAddTransaction = (createdTransaction: TransactionData) => {
@@ -73,7 +75,7 @@ const Transactions: React.FC = () => {
       await transactionService.deleteTransaction(id);
       setTransactions(prev => prev.filter(t => t.id !== id));
       setTotalCount(prev => prev - 1);
-    } catch (err) {
+    } catch (_error) {
       setError('Failed to delete transaction. Please try again.');
     }
   };

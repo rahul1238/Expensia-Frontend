@@ -42,7 +42,7 @@ export const transactionService = {
 
       csrfToken = response.data.token;
       return csrfToken;
-    } catch (error) {
+    } catch (_error) {
       throw new Error("Failed to fetch CSRF token");
     }
   },
@@ -57,7 +57,9 @@ export const transactionService = {
       try {
         const token = await this.getCsrfToken();
         headers = { "X-XSRF-TOKEN": token };
-      } catch (err) {}
+      } catch (_error) {
+        // CSRF token fetch failed, proceed without token
+      }
 
       const response = await api.get("/transactions", { headers });
 
@@ -80,7 +82,7 @@ export const transactionService = {
         }
       }
       return { transactions: [] };
-    } catch (error) {
+    } catch (_error) {
       throw new Error("Failed to fetch transactions");
     }
   },
@@ -97,7 +99,7 @@ export const transactionService = {
       let token;
       try {
         token = await this.getCsrfToken();
-      } catch (err) {
+      } catch (_error) {
         const { userService } = await import("./userService");
         await userService.refreshToken();
         token = await this.getCsrfToken();
@@ -158,7 +160,8 @@ export const transactionService = {
       try {
         const token = await this.getCsrfToken();
         headers = { "X-XSRF-TOKEN": token };
-      } catch (err) {
+      } catch (_error) {
+        // CSRF token fetch failed, proceed without token
       }
 
       const queryParams = new URLSearchParams();
@@ -196,7 +199,7 @@ export const transactionService = {
         }
       }
       return { transactions: [] };
-    } catch (error) {
+    } catch (_error) {
       throw new Error("Failed to fetch transactions");
     }
   },
@@ -215,7 +218,7 @@ export const transactionService = {
       let token;
       try {
         token = await this.getCsrfToken();
-      } catch (err) {
+      } catch (_error) {
         const { userService } = await import("./userService");
         await userService.refreshToken();
         token = await this.getCsrfToken();
@@ -271,7 +274,7 @@ export const transactionService = {
       let token;
       try {
         token = await this.getCsrfToken();
-      } catch (err) {
+      } catch (_error) {
         const { userService } = await import("./userService");
         await userService.refreshToken();
         token = await this.getCsrfToken();

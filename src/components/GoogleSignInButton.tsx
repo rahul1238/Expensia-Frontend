@@ -6,7 +6,35 @@ import { userService } from '../services/userService';
 import Button from './ui/Button';
 import { useTranslation } from '../hooks/useTranslation';
 
-interface GoogleWindow extends Window { google?: any }
+interface GoogleConfig {
+  client_id: string;
+  callback: (response: { credential?: string }) => void;
+  ux_mode: string;
+}
+
+interface GoogleButtonConfig {
+  theme: string;
+  size: string;
+  type: string;
+  text: string;
+  shape: string;
+}
+
+interface GoogleNotification {
+  isNotDisplayed: () => boolean;
+}
+
+interface GoogleWindow extends Window { 
+  google?: {
+    accounts: {
+      id: {
+        initialize: (config: GoogleConfig) => void;
+        renderButton: (element: HTMLElement, config: GoogleButtonConfig) => void;
+        prompt: (callback: (notification: GoogleNotification) => void) => void;
+      }
+    }
+  }
+}
 
 const SCRIPT_ID = 'google-identity-services';
 const SCRIPT_SRC = 'https://accounts.google.com/gsi/client';
@@ -41,7 +69,7 @@ export default function GoogleSignInButton() {
         });
         setShowFallback(false);
       }
-    } catch (err) {
+    } catch (_error) {
       setError('Google init failed');
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -63,7 +91,7 @@ export default function GoogleSignInButton() {
     }
   }, [clientId, initializeGoogle]);
 
-  const handleCredentialResponse = useCallback(async (response: any) => {
+  const handleCredentialResponse = useCallback(async (response: { credential?: string }) => {
     if (!response?.credential || loading) return;
     setLoading(true);
     setError(null);
@@ -73,8 +101,8 @@ export default function GoogleSignInButton() {
         dispatch(logIn({ user: auth.user, token: 'auth-cookie-present' }));
         navigate('/dashboard');
       }
-    } catch (e) {
-      setError(e instanceof Error ? e.message : 'Google sign-in failed');
+    } catch (error) {
+      setError(error instanceof Error ? error.message : 'Google sign-in failed');
     } finally {
       setLoading(false);
     }
@@ -93,7 +121,7 @@ export default function GoogleSignInButton() {
           onClick={() => {
             const w = window as GoogleWindow;
             if (w.google && clientId) {
-              w.google.accounts.id.prompt((notification: any) => {
+              w.google.accounts.id.prompt((notification: { isNotDisplayed: () => boolean }) => {
                 if (notification.isNotDisplayed()) {
                   setError('Google prompt not displayed');
                 }

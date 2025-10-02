@@ -1,4 +1,5 @@
 import api from './apiService';
+import axios from 'axios';
 import type { EmailTransaction } from '../types/email';
 
 export interface GmailSyncResponse {
@@ -23,9 +24,9 @@ export const gmailService = {
     try {
       const { data } = await api.post('/gmail/sync');
       return data;
-    } catch (error: any) {
+    } catch (error: unknown) {
       // Handle authentication expired error
-      if (error.response?.status === 401 && error.response?.data?.code === 'AUTH_EXPIRED') {
+      if (axios.isAxiosError(error) && error.response?.status === 401 && error.response?.data?.code === 'AUTH_EXPIRED') {
         // Clear auth data and redirect to login
         document.cookie = "accessToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
         document.cookie = "refreshToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";

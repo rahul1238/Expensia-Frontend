@@ -49,14 +49,15 @@ function App() {
           user,
           token: "auth-cookie-present"
         }));
-      } catch (err) {
+      } catch {
+        // Auth check failed, user remains logged out
       } finally {
         setLoading(false);
       }
     };
 
     checkAuthStatus();
-  }, [dispatch]);
+  }, [dispatch, location.pathname]);
   const isAuthPage = ['/login', '/signup'].includes(location.pathname);
 
   if (loading) {
