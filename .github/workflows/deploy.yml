@@ -9,6 +9,10 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      checks: write
+      pull-requests: write
     
     steps:
     - name: Checkout code
@@ -17,7 +21,7 @@ jobs:
     - name: Setup Node.js
       uses: actions/setup-node@v4
       with:
-        node-version: '18'
+        node-version: '20'
         cache: 'npm'
     
     - name: Install dependencies
@@ -39,7 +43,9 @@ jobs:
         repoToken: ${{ secrets.GITHUB_TOKEN }}
         firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
         projectId: expensia-frontend
+        entryPoint: .
         expires: 30d
+        firebaseToolsVersion: 'latest'
     
     - name: Deploy to Firebase (Production)
       if: github.event_name == 'push' && github.ref == 'refs/heads/main'
@@ -49,3 +55,5 @@ jobs:
         firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
         projectId: expensia-frontend
         channelId: live
+        entryPoint: .
+        firebaseToolsVersion: 'latest'
