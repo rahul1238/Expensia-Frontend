@@ -33,15 +33,16 @@ jobs:
       run: npm run build
     
     - name: Deploy to Firebase (Preview)
-      if: github.event_name == 'pull_request'
+      if: github.event_name == 'pull_request' || (github.event_name == 'push' && github.ref == 'refs/heads/deployment_config')
       uses: FirebaseExtended/action-hosting-deploy@v0
       with:
         repoToken: ${{ secrets.GITHUB_TOKEN }}
         firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
         projectId: expensia-frontend
+        expires: 30d
     
     - name: Deploy to Firebase (Production)
-      if: github.event_name == 'push' && (github.ref == 'refs/heads/main')
+      if: github.event_name == 'push' && github.ref == 'refs/heads/main'
       uses: FirebaseExtended/action-hosting-deploy@v0
       with:
         repoToken: ${{ secrets.GITHUB_TOKEN }}
