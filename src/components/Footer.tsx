@@ -65,8 +65,8 @@ export default function Footer() {
           <div className="col-span-1">
             <h3 className="text-lg font-semibold mb-4">{t('common.legal')}</h3>
             <ul className="space-y-2">
-              <li><Link to="/privacy" className="text-gray-400 hover:text-white transition-colors">{t('common.privacyPolicy')}</Link></li>
-              <li><Link to="/terms" className="text-gray-400 hover:text-white transition-colors">{t('common.termsOfService')}</Link></li>
+              <li><Link to="/privacy-policy" className="text-gray-400 hover:text-white transition-colors">{t('common.privacyPolicy')}</Link></li>
+              <li><Link to="/terms-of-service" className="text-gray-400 hover:text-white transition-colors">{t('common.termsOfService')}</Link></li>
               <li><Link to="/cookies" className="text-gray-400 hover:text-white transition-colors">{t('common.cookiePolicy')}</Link></li>
               <li><Link to="/security" className="text-gray-400 hover:text-white transition-colors">{t('common.security')}</Link></li>
             </ul>

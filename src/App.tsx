@@ -19,6 +19,8 @@ import Profile from "./pages/Profile";
 import Settings from "./pages/Settings";
 import NotFound from "./pages/NotFound";
 import AuthCallback from "./pages/AuthCallback";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsOfService from "./pages/TermsOfService";
 
 import type { RootState } from "./app/store";
 
@@ -36,7 +38,7 @@ function App() {
   useEffect(() => {
     const checkAuthStatus = async () => {
       try {
-        if (['/login', '/signup', '/forgot-password'].includes(location.pathname)) {
+        if (['/', '/login', '/signup', '/forgot-password', '/privacy-policy', '/terms-of-service'].includes(location.pathname)) {
           setLoading(false);
           return;
         }
@@ -55,7 +57,7 @@ function App() {
 
     checkAuthStatus();
   }, [dispatch]);
-  const isPublicRoute = ['/login', '/signup'].includes(location.pathname);
+  const isAuthPage = ['/login', '/signup'].includes(location.pathname);
 
   if (loading) {
     return (
@@ -73,7 +75,9 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-  <Route path="/auth/callback" element={<AuthCallback />} />
+        <Route path="/auth/callback" element={<AuthCallback />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="/terms-of-service" element={<TermsOfService />} />
         <Route path="/dashboard" element={
           <ProtectedRoute>
             <Dashboard />
@@ -96,7 +100,7 @@ function App() {
         } />
         <Route path="*" element={<NotFound />} />
       </Routes>
-      {!isPublicRoute && <Footer />}
+      {!isAuthPage && <Footer />}
     </div>
   );
 }

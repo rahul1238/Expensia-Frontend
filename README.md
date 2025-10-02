@@ -5,88 +5,101 @@ A modern financial management application built with React, TypeScript, and Vite
 ## Features
 
 - 💰 Expense tracking and management
-- 📊 Financial analytics and reporting
+- 📊 Financial analytics and reporting  
 - 🌐 Multi-language support (12 languages)
 - 🎨 Light/Dark theme switching
-- 🔒 Secure authentication
+- 🔒 Secure Google OAuth authentication
+- � Gmail transaction import
+- 🤖 AI-powered transaction categorization
 - 📱 Responsive design
 
-Currently, two official plugins are available:
+## Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Frontend**: React 18, TypeScript, Vite
+- **Styling**: Tailwind CSS
+- **State Management**: Redux Toolkit
+- **Routing**: React Router
+- **UI Components**: Headless UI, Heroicons
+- **Charts**: Chart.js, React Chart.js 2
+- **Internationalization**: React i18next
 
-## Expanding the ESLint configuration
+## Internationalization
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-## Internationalization (i18n)
-
-This project supports 12 languages:
+The application supports 12 languages:
 - English, Hindi, Spanish, French, German, Italian
 - Portuguese, Chinese, Japanese, Korean, Arabic, Russian
 
-For detailed information on working with translations, see [I18N_GUIDE.md](./I18N_GUIDE.md).
+Language switching is available in the user interface, with automatic detection of browser locale as default.
 
-### Maintaining Translations
+## Prerequisites
 
-We've implemented an automated system to ensure translation key consistency across all language files:
+- Node.js 18+
+- npm or yarn package manager
 
-```bash
-# Run this to update all locale files with any missing keys
-./update_translations.sh
-```
+## Installation
 
-## Development Setup
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/rahul1238/Expensia-Frontend.git
+   cd Expensia-Frontend
+   ```
 
-1. Clone the repository
-```bash
-git clone https://github.com/rahul1238/Expensia-Frontend.git
-cd Expensia-Frontend
-```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-2. Install dependencies
-```bash
-npm install
-```
+3. Set up environment variables:
+   ```bash
+   cp .env.example .env
+   ```
+   
+   Configure the required environment variables in `.env`
 
-3. Start the development server
-```bash
-npm run dev
-```
+4. Start the development server:
+   ```bash
+   npm run dev
+   ```
+
+The application will be available at `http://localhost:5173`
 
 ## Available Scripts
 
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run lint` - Lint the code
-- `npm run preview` - Preview the production build
-- `./update_translations.sh` - Update translation files
+- `npm run dev` - Start development server with hot reload
+- `npm run build` - Build optimized production bundle
+- `npm run lint` - Run ESLint code analysis
+- `npm run preview` - Preview production build locally
+
+## Deployment
+
+### Firebase Hosting
+
+The application is configured for deployment on Firebase Hosting with custom domain support.
+
+1. Build the application:
+   ```bash
+   npm run build
+   ```
+
+2. Deploy to Firebase:
+   ```bash
+   firebase deploy
+   ```
+
+## Environment Variables
+
+- `VITE_API_BASE_URL` - Backend API base URL
+- `VITE_GOOGLE_CLIENT_ID` - Google OAuth client ID
+- `VITE_FIREBASE_CONFIG` - Firebase configuration object
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Commit your changes
+4. Push to the branch
+5. Open a Pull Request
+
+## License
+
+This project is licensed under the MIT License.

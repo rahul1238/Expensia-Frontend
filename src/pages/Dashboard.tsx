@@ -202,7 +202,7 @@ const Dashboard: React.FC = () => {
                 onClick={() => setShowAddModal(true)}
                 variant="outline"
               >
-                {t('navigation.addYourFirstTransaction')}
+                {t('navigation.addTransaction')}
               </Button>
             </div>
           )}
