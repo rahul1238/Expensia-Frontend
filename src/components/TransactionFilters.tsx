@@ -17,7 +17,7 @@ const TransactionFiltersComponent: React.FC<TransactionFiltersProps> = ({
     if (value === '' || value === undefined) {
       delete newFilters[key];
     } else {
-      newFilters[key] = value as any;
+      (newFilters as Record<string, string | number>)[key] = value;
     }
     
     setLocalFilters(newFilters);

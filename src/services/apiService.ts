@@ -80,9 +80,9 @@ api.interceptors.response.use(
         } else {
           throw new Error("Token refresh failed");
         }
-      } catch (err) {
+      } catch (error) {
         processQueue(
-          err instanceof Error ? err : new Error("Token refresh failed")
+          error instanceof Error ? error : new Error("Token refresh failed")
         );
         isRefreshing = false;
         

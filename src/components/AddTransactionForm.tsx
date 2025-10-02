@@ -55,7 +55,7 @@ const AddTransactionForm: React.FC<AddTransactionFormProps> = ({ onSuccess, onCa
       }
 
       onSuccess(result);
-    } catch (error) {
+    } catch {
       setError(initialData?.id ? 'Failed to update transaction. Please try again.' : 'Failed to create transaction. Please try again.');
     } finally {
       setIsLoading(false);

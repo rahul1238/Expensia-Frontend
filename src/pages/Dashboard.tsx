@@ -56,7 +56,7 @@ const Dashboard: React.FC = () => {
         totalExpenses,
         netBalance: totalIncome - totalExpenses
       });
-    } catch (err) {
+    } catch (_error) {
       setError('Failed to load transactions');
     } finally {
       setIsLoading(false);
@@ -202,7 +202,7 @@ const Dashboard: React.FC = () => {
                 onClick={() => setShowAddModal(true)}
                 variant="outline"
               >
-                {t('navigation.addYourFirstTransaction')}
+                {t('navigation.addTransaction')}
               </Button>
             </div>
           )}

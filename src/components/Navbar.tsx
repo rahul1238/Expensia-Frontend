@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useState, useRef, useEffect } from "react";
 import { logOut } from "../feature/auth/authSlice";
 import { useTranslation } from "../hooks/useTranslation";
+import { userService } from "../services/userService";
 import Logo from "./Logo";
 import NavbarLink from "./ui/NavbarLink";
 import LinkButton from "./ui/LinkButton";
@@ -20,9 +21,15 @@ export default function Navbar() {
   const dropdownRef = useRef<HTMLDivElement>(null);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
 
-  const handleLogout = () => {
-    dispatch(logOut());
-    setShowProfileDropdown(false);
+  const handleLogout = async () => {
+    try {
+      await userService.logout();
+    } catch (error) {
+      console.error("Error:", error);
+    } finally {
+      dispatch(logOut());
+      setShowProfileDropdown(false);
+    }
   };
 
   // Close dropdown when clicking outside

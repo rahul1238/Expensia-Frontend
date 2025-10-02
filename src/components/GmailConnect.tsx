@@ -21,8 +21,8 @@ const GmailConnect: React.FC = () => {
       setError(null);
       const url = await gmailService.getConnectUrl();
       window.location.href = url;
-    } catch (e: any) {
-      setError(e?.message || 'Failed to start Gmail connect');
+    } catch (e: unknown) {
+      setError(e instanceof Error ? e.message : 'Failed to start Gmail connect');
     } finally {
       setConnecting(false);
     }
@@ -36,8 +36,8 @@ const GmailConnect: React.FC = () => {
       setLastSyncResult(syncResult);
       const data = await gmailService.listTransactions();
       setTransactions(data);
-    } catch (e: any) {
-      setError(e?.message || 'Sync failed');
+    } catch (e: unknown) {
+      setError(e instanceof Error ? e.message : 'Sync failed');
       setLastSyncResult(null);
     } finally {
       setSyncing(false);
@@ -52,8 +52,8 @@ const GmailConnect: React.FC = () => {
       setLastSyncResult(syncResult);
       const data = await gmailService.listTransactions();
       setTransactions(data);
-    } catch (e: any) {
-      setError(e?.message || 'Current month sync failed');
+    } catch (e: unknown) {
+      setError(e instanceof Error ? e.message : 'Current month sync failed');
       setLastSyncResult(null);
     } finally {
       setSyncingCurrentMonth(false);
@@ -70,8 +70,8 @@ const GmailConnect: React.FC = () => {
       // Refresh transaction list after evaluation
       const data = await gmailService.listTransactions();
       setTransactions(data);
-    } catch (e: any) {
-      setError(e?.message || 'Email evaluation failed');
+    } catch (e: unknown) {
+      setError(e instanceof Error ? e.message : 'Email evaluation failed');
       setLastEvaluationResult(null);
     } finally {
       setEvaluating(false);
@@ -84,9 +84,9 @@ const GmailConnect: React.FC = () => {
       try {
         const data = await gmailService.listTransactions();
         if (mounted) setTransactions(data);
-      } catch (e: any) {
+      } catch (e: unknown) {
         console.error('Failed to load Gmail transactions:', e);
-        if (mounted) setError(e?.message || 'Failed to load Gmail transactions');
+        if (mounted) setError(e instanceof Error ? e.message : 'Failed to load Gmail transactions');
       }
     })();
     return () => { mounted = false; };

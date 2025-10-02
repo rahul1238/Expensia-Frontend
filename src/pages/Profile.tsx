@@ -86,7 +86,7 @@ const Profile: React.FC = () => {
                     ...stats,
                     isLoading: false,
                 });
-            } catch (error) {
+            } catch (_error) {
                 setStatistics(prev => ({ ...prev, isLoading: false }));
             }
         };
@@ -120,7 +120,7 @@ const Profile: React.FC = () => {
                 ...stats,
                 isLoading: false,
             });
-    } catch (error) {
+    } catch (_error) {
             setStatistics(prev => ({ ...prev, isLoading: false }));
         }
     };

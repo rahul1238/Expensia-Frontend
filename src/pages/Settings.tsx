@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { logOut } from '../feature/auth/authSlice';
 import { type LanguageCode } from '../feature/language/languageSlice';
 import { useTranslation } from '../hooks/useTranslation';
+import { userService } from '../services/userService';
 import { SettingsSidebar } from '../components/settings/SettingsSidebar';
 import { AppearanceSettings } from '../components/settings/AppearanceSettings';
 import { NotificationSettings } from '../components/settings/NotificationSettings';
@@ -96,15 +97,21 @@ const Settings: React.FC = () => {
   };
 
   // Handle logout
-  const handleLogout = () => {
-    dispatch(logOut());
-    navigate('/');
+  const handleLogout = async () => {
+    try {
+      await userService.logout();
+    } catch (error) {
+      console.error("Error:", error);
+    } finally {
+      dispatch(logOut());
+      navigate('/');
+    }
   };
 
   // Handle account deletion
   const handleDeleteAccount = () => {
-    // TODO: Implement account deletion
-    setSaveMessage('Account deletion is not yet implemented.');
+    // Feature not yet implemented - placeholder for future functionality
+    setSaveMessage('Account deletion feature is not available at this time.');
     setShowDeleteConfirm(false);
   };
 

@@ -31,8 +31,8 @@ export default function GoogleOAuthRedirectButton({ className = '' }: { classNam
         // Absolute URL
         window.location.href = authUrl;
       }
-    } catch (e) {
-      setError(e instanceof Error ? e.message : 'Failed to start Google login');
+    } catch (error) {
+      setError(error instanceof Error ? error.message : 'Failed to start Google login');
     } finally {
       setLoading(false);
     }
